@@ -1,0 +1,29 @@
+<package format="2">
+	<name>detection</name>
+	<description>
+    	 detection
+	</description>
+
+	<author>Satish and Philip</author>
+	<license>BSD</license>
+
+	<url>http://ros.org/wiki/404</url>
+
+  <version>1.0.0</version>
+  <maintainer email="TODO@TODO.DE">TODO</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+	<depend>gazebo_ros</depend>
+	<depend>tf</depend>
+	<depend>handling_msgs</depend>
+	<depend>sensor_msgs</depend>
+	<depend>geometry_msgs</depend>
+	<depend>roscpp</depend>
+	<depend>std_msgs</depend>
+	<depend>pcl_ros</depend>
+	<depend>tf_conversions</depend>
+	<depend>operator_interface</depend>
+</package>
+
+

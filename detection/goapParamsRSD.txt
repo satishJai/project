@@ -1,0 +1,1074 @@
+GETjag:
+  camera_gripper:
+    image_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    imager_rate: 2.0
+  thermal_camera:
+    image_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    imager_rate: 2.0
+  xtion:
+    imager_rate: 2.0
+    rgb:
+      image_raw:
+        compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+        compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+        theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+detection:
+  CorrespondenceVoting:
+    correspondenceRatioThreshold: {max: 1.0, min: 0.0, type: double, value: 0.15}
+  control:
+    descriptorClass: {options: 'ShotCreator,CShotCreator,RSDCreator,FPFHCreator,ShapeContextCreator,UShapeContextCreator',
+      type: enum, value: RSDCreator}
+    evaluationClass: {options: 'CorrespondenceVoting,CorrespondenceVotingICP', type: enum,
+      value: CorrespondenceVoting}
+    keypointClass: {options: 'VoxelGridCreator,NDCreator,ISSCreator', type: enum,
+      value: VoxelGridCreator}
+    matchingClass: {options: 'ColorMatching,SimpleMatching', type: enum, value: ColorMatching}
+    poseEstimatorClass: {options: 'GCClustering,HoughClustering', type: enum, value: GCClustering}
+  debug:
+    descriptorDebugMessages: {type: bool, value: false}
+  descriptor:
+    3dsc:
+      minimalRadius: {max: 100.0, min: 0.0, type: double, value: 10.0}
+      pointDensityRadius: {max: 100.0, min: 0.0, type: double, value: 5.0}
+    radius: {max: 200.0, min: 0.0, type: double, value: 45}
+    rsd:
+      planeRadius: {max: 100.0, min: 0.0, type: double, value: 20.0}
+    usc:
+      localRadius: {max: 200.0, min: 0.0, type: double, value: 75.0}
+      minimalRadius: {max: 100.0, min: 0.0, type: double, value: 10.0}
+      pointDensityRadius: {max: 100.0, min: 0.0, type: double, value: 5.0}
+  evaluation:
+    ICP:
+      maxIterations: {max: 1000.0, min: 0.0, type: int, value: 50}
+      resolution: {max: 50.0, min: 0.0, type: double, value: 3.0}
+      transformationEpsilon: {max: 1.0, min: 0.0, type: double, value: 1.0e-05}
+  guesser:
+    threshold: {max: 100.0, min: 0.0, type: double, value: 20.0}
+  keypoints:
+    iss:
+      minNeighbors: {max: 100.0, min: 0.0, type: int, value: 5}
+      nonMaxRadius: {max: 50.0, min: 0.0, type: double, value: 4.0}
+      salientRadius: {max: 50.0, min: 0.0, type: double, value: 6.0}
+      threshold21: {max: 50.0, min: 0.0, type: double, value: 0.975}
+      threshold32: {max: 50.0, min: 0.0, type: double, value: 0.975}
+    radius: {max: 100.0, min: 0.0, type: double, value: 10}
+  matching:
+    3dsc:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+    colorMatching:
+      angleThreshold: {max: 360.0, min: 0.0, type: double, value: 5.0}
+      blackThreshold: {max: 1.0, min: 0.0, type: double, value: 0.03}
+      grayThreshold: {max: 1.0, min: 0.0, type: double, value: 0.05}
+      valueThreshold: {max: 1.0, min: 0.0, type: double, value: 0.025}
+    cshot:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.5}
+    fpfh:
+      squareDistanceThreshold: {max: 10000.0, min: 0.0, type: float, value: 0.25}
+    rsd:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 1.0e-05}
+    shot:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+    usc:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+  normals:
+    radius: {max: 100.0, min: 1.0, type: int, value: 20}
+  poseEstimation:
+    gcClustering:
+      cgSize: {max: 200.0, min: 0.0, type: double, value: 75}
+      cgThreshold: {max: 100.0, min: 0.0, type: double, value: 6}
+    hough:
+      hgSize: {max: 200.0, min: 0.0, type: double, value: 45.0}
+      hgThreshold: {max: 100.0, min: 0.0, type: double, value: 20.0}
+  refFrame:
+    radius: {max: 100.0, min: 0.0, type: double, value: 30.0}
+  segmentation:
+    euclidean:
+      clusterTolerance: {max: 1.0, min: 0.0, type: double, value: 0.02}
+      maxClusterSize: {max: 100000.0, min: 0.0, type: int, value: 10000}
+      minClusterSize: {max: 10000.0, min: 0.0, type: int, value: 400}
+    kdradius: {max: 100.0, min: 1.0, type: int, value: 50}
+    sac:
+      distanceThreshold: {max: 1.0, min: 0.0, type: double, value: 0.009}
+      maxIterations: {max: 100.0, min: 1.0, type: int, value: 100}
+    voxelLeafSize: {max: 1.0, min: 0.0, type: double, value: 0.01}
+  visualization:
+    denseSize: {max: 20.0, min: 0.0, type: double, value: 1}
+    estimationSize: {max: 20.0, min: 0.0, type: double, value: 2.0}
+    keypointSize: {max: 20.0, min: 0.0, type: double, value: 6}
+    showAllCorrespondences: {type: bool, value: false}
+    showCorrespondences: {type: bool, value: true}
+    showDense: {type: bool, value: true}
+    showEstimatedObjects: {type: bool, value: true}
+    showKeypoints: {type: bool, value: true}
+    showMatchingColor: {type: bool, value: true}
+    showNormals: {type: bool, value: false}
+    showOnlyWinner: {type: bool, value: true}
+    showReferenceFrames: {type: bool, value: false}
+    showVoting: {type: bool, value: false}
+gazebo: {auto_disable_bodies: false, cfm: 0.0, contact_max_correcting_vel: 100.0,
+  contact_surface_layer: 0.001, erp: 0.2, gravity_x: 0.0, gravity_y: 0.0, gravity_z: -9.81,
+  max_contacts: 20, max_update_rate: 1000.0, sor_pgs_iters: 50, sor_pgs_precon_iters: 0,
+  sor_pgs_rms_error_tol: 0.0, sor_pgs_w: 1.3, time_step: 0.001}
+kinect2_bridge: {base_name: kinect2, base_name_tf: camera, bilateral_filter: true,
+  calib_path: /cdtemp/philipf/kinect2_bridge2/data/, depth_device: -1, depth_method: default,
+  edge_aware_filter: true, fps_limit: 1.0, jpeg_quality: 90, max_depth: 5.0, min_depth: 0.1,
+  png_level: 1, publish_tf: false, queue_size: 5, reg_device: -1, reg_method: default,
+  sensor: '', use_png: false, worker_threads: 4}
+kinect2_points_xyzrgb_hd: {queue_size: 5}
+kinect2_points_xyzrgb_qhd: {queue_size: 5}
+kinect2_points_xyzrgb_sd: {queue_size: 5}
+robot_description: "<?xml version=\"1.0\" ?>\n<!-- ===================================================================================\
+  \ -->\n<!-- |    This document was autogenerated by xacro from /home/philipf/ros/src/gazebo-ros/getjag_description/urdf/getjag.xacro\
+  \ | -->\n<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                \
+  \                 | -->\n<!-- ===================================================================================\
+  \ -->\n<robot name=\"GETjag\" xmlns:xacro=\"http://www.ros.org/wiki/xacro\">\n \
+  \ <!-- Created on: Jun 26, 2017 Author: Philip Frieling -->\n  <!-- Main Parameters\
+  \ -->\n  <!-- sensor namespace -->\n  <!-- Physical Constants -->\n  <!-- Accrelation\
+  \ factor -->\n  <!-- Flipper Parameters -->\n  <!-- Sensor Tower Parameters -->\n\
+  \  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between 0 and\
+  \ firstTLength -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Arm\
+  \ parameters -->\n  <!-- Main Parameters -->\n  <!-- sensor namespace -->\n  <!--\
+  \ Physical Constants -->\n  <!-- Accrelation factor -->\n  <!-- Flipper Parameters\
+  \ -->\n  <!-- Sensor Tower Parameters -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between\
+  \ 0 and firstTLength -->\n  <!-- Arm parameters -->\n  <!-- Main Parameters -->\n\
+  \  <!-- sensor namespace -->\n  <!-- Physical Constants -->\n  <!-- Accrelation\
+  \ factor -->\n  <!-- Flipper Parameters -->\n  <!-- Sensor Tower Parameters -->\n\
+  \  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between 0 and\
+  \ firstTLength -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Arm\
+  \ parameters -->\n  <!-- Main Parameters -->\n  <!-- sensor namespace -->\n  <!--\
+  \ Physical Constants -->\n  <!-- Accrelation factor -->\n  <!-- Flipper Parameters\
+  \ -->\n  <!-- Sensor Tower Parameters -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between\
+  \ 0 and firstTLength -->\n  <!-- Arm parameters -->\n  <!-- MAKROS FOR WHEEL DRIVE\
+  \ -->\n  <!--  \"crate_Flipper\" AND \"create_track\" FOR EACH DRIVE -->\n  <!--\
+  \ Robot Model Starts Here! -->\n  <!-- base_link -->\n  <link name=\"GETjag/base_link\"\
+  >\n\t</link>\n  <link name=\"GETjag/chassis\">\n    <inertial>\n      <origin rpy=\"\
+  0 0 0\" xyz=\"-0.007279 -0.016881 0.046048\"/>\n      <mass value=\"10.0\"/>\n \
+  \     <inertia ixx=\"0.1359375\" ixy=\"0\" ixz=\"0\" iyy=\"0.3879375\" iyz=\"0\"\
+  \ izz=\"0.2895\"/>\n    </inertial>\n    <collision name=\"chassis_collision\">\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"0 0 0.025\"/>\n      <geometry>\n        <box\
+  \ size=\"0.585 0.375 0.15\"/>\n      </geometry>\n    </collision>\n    <collision\
+  \ name=\"chassis_colliMidBox\">\n      <origin rpy=\"0 0 0\" xyz=\"-0.0279 -0.12\
+  \ 0.16\"/>\n      <geometry>\n        <box size=\"0.215 0.135 0.12\"/>\n      </geometry>\n\
+  \    </collision>\n    <collision name=\"chassis_colliLowBox\">\n      <origin rpy=\"\
+  0 0 0\" xyz=\"-0.046 -0.12 0.1282\"/>\n      <geometry>\n        <box size=\"0.46\
+  \ 0.135 0.055\"/>\n      </geometry>\n    </collision>\n    <visual name=\"chassis_vis\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/GETjagBody2.dae\" scale=\"1 1 1\"\
+  />\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/chassis_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/chassis\"\
+  />\n    <origin rpy=\"0 0 0\" xyz=\"0 0 0.097\"/>\n  </joint>\n  <link name=\"GETjag/chassis_front\"\
+  >\n    <inertial>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.004844\"/>\n      <mass\
+  \ value=\"5.0\"/>\n      <inertia ixx=\"0.0677083333333\" ixy=\"0\" ixz=\"0\" iyy=\"\
+  0.0677083333333\" iyz=\"0\" izz=\"0.00208333333333\"/>\n    </inertial>\n  </link>\n\
+  \  <joint name=\"GETjag/chassis_front_joint\" type=\"fixed\">\n    <parent link=\"\
+  GETjag/base_link\"/>\n    <child link=\"GETjag/chassis_front\"/>\n    <origin rpy=\"\
+  0 0 0\" xyz=\"0.24 0 0.097\"/>\n  </joint>\n  <link name=\"GETjag/chassis_back\"\
+  >\n    <inertial>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.004844\"/>\n      <mass\
+  \ value=\"5.0\"/>\n      <inertia ixx=\"0.0677083333333\" ixy=\"0\" ixz=\"0\" iyy=\"\
+  0.0677083333333\" iyz=\"0\" izz=\"0.00208333333333\"/>\n    </inertial>\n  </link>\n\
+  \  <joint name=\"GETjag/chassis_back_joint\" type=\"fixed\">\n    <parent link=\"\
+  GETjag/base_link\"/>\n    <child link=\"GETjag/chassis_back\"/>\n    <origin rpy=\"\
+  0 0 0\" xyz=\"0.24 0 0.097\"/>\n  </joint>\n  <link name=\"GETjag/flipper_front_link\"\
+  >\n    <inertial>\n      <inertia ixx=\"0.01\" ixy=\"0.0\" ixz=\"0.0\" iyy=\"0.01\"\
+  \ iyz=\"0.0\" izz=\"0.01\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n    \
+  \  <mass value=\"1.0\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/flipper_front_joint\"\
+  \ type=\"continuous\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"\
+  GETjag/flipper_front_link\"/>\n    <origin rpy=\"0 3.34159265359 0\" xyz=\"0.24\
+  \ 0 0.101844\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics damping=\"5.0\"/>\n \
+  \   <limit effort=\"200\" velocity=\"1.5\"/>\n  </joint>\n  <gazebo>\n    <plugin\
+  \ filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_flipper_front_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/flipper_front_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>4.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>80</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>flipper_front_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/flipper_rear_link\">\n    <inertial>\n\
+  \      <inertia ixx=\"0.01\" ixy=\"0.0\" ixz=\"0.0\" iyy=\"0.01\" iyz=\"0.0\" izz=\"\
+  0.01\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <mass value=\"1.0\"\
+  />\n    </inertial>\n  </link>\n  <joint name=\"GETjag/flipper_rear_joint\" type=\"\
+  continuous\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/flipper_rear_link\"\
+  />\n    <origin rpy=\"3.14159265359 -0.2 0\" xyz=\"-0.24 0 0.101844\"/>\n    <axis\
+  \ xyz=\"0 1 0\"/>\n    <dynamics damping=\"5.0\"/>\n    <limit effort=\"200\" velocity=\"\
+  1.5\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\" name=\"\
+  DynamixelMotor_flipper_rear_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/flipper_rear_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>80</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>flipper_rear_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/flipper_front_left_link\">\n\
+  \    <inertial>\n      <origin rpy=\"0 0 0\" xyz=\"-0.071853 0.0 0.0\"/>\n     \
+  \ <mass value=\"3.0\"/>\n      <inertia ixx=\"0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"\
+  0.0272\" iyz=\"0\" izz=\"0.0272\"/>\n    </inertial>\n    <collision name=\"flipper_front_left_collision_1\"\
+  >\n      <origin rpy=\"0 -0.212 0\" xyz=\"-0.117 0 0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_front_left_collision_2\"\
+  >\n      <origin rpy=\"0 0.212 0\" xyz=\"-0.117 0 -0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_front_left_wheel_1_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"0 0 0\"/>\n     \
+  \ <geometry>\n        <cylinder length=\"0.06\" radius=\"0.082\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision name=\"flipper_front_left_wheel_2_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"-0.232 0 0\"/>\n\
+  \      <geometry>\n        <cylinder length=\"0.06\" radius=\"0.0325\"/>\n     \
+  \ </geometry>\n      <surface>\n        <contact>\n          <ode>\n           \
+  \ <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n          </ode>\n\
+  \        </contact>\n      </surface>\n    </collision>\n    <visual name=\"flipper_front_left_visual\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/GETjagFlipper.dae\" scale=\"1 1.0\
+  \ 0.9\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/flipper_front_left_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/flipper_front_link\"/>\n    <child\
+  \ link=\"GETjag/flipper_front_left_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 0.28\
+  \ 0\"/>\n    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit\
+  \ effort=\"0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"4.0\"/>\n  </joint>\n  <gazebo\
+  \ reference=\"GETjag/flipper_front_left_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <link name=\"GETjag/flipper_front_right_link\">\n    <inertial>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"-0.071853 0.0 0.0\"/>\n      <mass value=\"3.0\"\
+  />\n      <inertia ixx=\"0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"0.0272\" iyz=\"0\" izz=\"\
+  0.0272\"/>\n    </inertial>\n    <collision name=\"flipper_front_right_collision_1\"\
+  >\n      <origin rpy=\"0 -0.212 0\" xyz=\"-0.117 0 0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_front_right_collision_2\"\
+  >\n      <origin rpy=\"0 0.212 0\" xyz=\"-0.117 0 -0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_front_right_wheel_1_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"0 0 0\"/>\n     \
+  \ <geometry>\n        <cylinder length=\"0.06\" radius=\"0.082\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision name=\"flipper_front_right_wheel_2_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"-0.232 0 0\"/>\n\
+  \      <geometry>\n        <cylinder length=\"0.06\" radius=\"0.0325\"/>\n     \
+  \ </geometry>\n      <surface>\n        <contact>\n          <ode>\n           \
+  \ <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n          </ode>\n\
+  \        </contact>\n      </surface>\n    </collision>\n    <visual name=\"flipper_front_right_visual\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/GETjagFlipper.dae\" scale=\"1 1.0\
+  \ 0.9\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/flipper_front_right_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/flipper_front_link\"/>\n    <child\
+  \ link=\"GETjag/flipper_front_right_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0\
+  \ -0.28 0\"/>\n    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit\
+  \ effort=\"0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"4.0\"/>\n  </joint>\n  <gazebo\
+  \ reference=\"GETjag/flipper_front_right_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <link name=\"GETjag/flipper_rear_left_link\">\n    <inertial>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"-0.071853 0.0 0.0\"/>\n      <mass value=\"3.0\"\
+  />\n      <inertia ixx=\"0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"0.0272\" iyz=\"0\" izz=\"\
+  0.0272\"/>\n    </inertial>\n    <collision name=\"flipper_rear_left_collision_1\"\
+  >\n      <origin rpy=\"0 -0.212 0\" xyz=\"-0.117 0 0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_rear_left_collision_2\"\
+  >\n      <origin rpy=\"0 0.212 0\" xyz=\"-0.117 0 -0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_rear_left_wheel_1_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"0 0 0\"/>\n     \
+  \ <geometry>\n        <cylinder length=\"0.06\" radius=\"0.082\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision name=\"flipper_rear_left_wheel_2_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"-0.232 0 0\"/>\n\
+  \      <geometry>\n        <cylinder length=\"0.06\" radius=\"0.0325\"/>\n     \
+  \ </geometry>\n      <surface>\n        <contact>\n          <ode>\n           \
+  \ <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n          </ode>\n\
+  \        </contact>\n      </surface>\n    </collision>\n    <visual name=\"flipper_rear_left_visual\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/GETjagFlipper.dae\" scale=\"1 1.0\
+  \ 0.9\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/flipper_rear_left_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/flipper_rear_link\"/>\n    <child\
+  \ link=\"GETjag/flipper_rear_left_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 -0.28\
+  \ 0\"/>\n    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit\
+  \ effort=\"0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"4.0\"/>\n  </joint>\n  <gazebo\
+  \ reference=\"GETjag/flipper_rear_left_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <link name=\"GETjag/flipper_rear_right_link\">\n    <inertial>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"-0.071853 0.0 0.0\"/>\n      <mass value=\"3.0\"\
+  />\n      <inertia ixx=\"0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"0.0272\" iyz=\"0\" izz=\"\
+  0.0272\"/>\n    </inertial>\n    <collision name=\"flipper_rear_right_collision_1\"\
+  >\n      <origin rpy=\"0 -0.212 0\" xyz=\"-0.117 0 0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_rear_right_collision_2\"\
+  >\n      <origin rpy=\"0 0.212 0\" xyz=\"-0.117 0 -0.024\"/>\n      <geometry>\n\
+  \        <box size=\"0.232 0.06 0.066\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"flipper_rear_right_wheel_1_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"0 0 0\"/>\n     \
+  \ <geometry>\n        <cylinder length=\"0.06\" radius=\"0.082\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision name=\"flipper_rear_right_wheel_2_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"-0.232 0 0\"/>\n\
+  \      <geometry>\n        <cylinder length=\"0.06\" radius=\"0.0325\"/>\n     \
+  \ </geometry>\n      <surface>\n        <contact>\n          <ode>\n           \
+  \ <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n          </ode>\n\
+  \        </contact>\n      </surface>\n    </collision>\n    <visual name=\"flipper_rear_right_visual\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/GETjagFlipper.dae\" scale=\"1 1.0\
+  \ 0.9\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/flipper_rear_right_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/flipper_rear_link\"/>\n    <child\
+  \ link=\"GETjag/flipper_rear_right_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 0.28\
+  \ 0\"/>\n    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit\
+  \ effort=\"0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"4.0\"/>\n  </joint>\n  <gazebo\
+  \ reference=\"GETjag/flipper_rear_right_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <link name=\"GETjag/track_left_link\">\n    <inertial>\n      <origin\
+  \ rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <mass value=\"3.0\"/>\n      <inertia ixx=\"\
+  0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"0.08\" iyz=\"0\" izz=\"0.08\"/>\n    </inertial>\n\
+  \    <visual>\n      <origin rpy=\"0 0 3.14159265359\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/GetjagTrack2.dae\"\
+  \ scale=\"0.96 1.0 0.9\"/>\n      </geometry>\n    </visual>\n    <collision>\n\
+  \      <origin rpy=\"0 0 3.14159265359\" xyz=\"0 0 0\"/>\n      <geometry>\n   \
+  \     <box size=\"0.48 0.06 0.16\"/>\n      </geometry>\n      <surface>\n     \
+  \   <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n           \
+  \ <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n      </surface>\n\
+  \    </collision>\n    <collision name=\"track_left_wheel_1_collision\">\n     \
+  \ <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"0.24 0 0\"/>\n      <geometry>\n\
+  \        <cylinder length=\"0.06\" radius=\"0.08\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision name=\"track_left_wheel_1_collision\"\
+  >\n      <origin rpy=\"1.57079632679 1.57079632679 0.0\" xyz=\"-0.24 0 0\"/>\n \
+  \     <geometry>\n        <cylinder length=\"0.06\" radius=\"0.08\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n  </link>\n  <joint name=\"GETjag/track_left_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"\
+  GETjag/track_left_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 0.22 0.101844\"/>\n\
+  \    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit effort=\"\
+  0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"4.0\"/>\n  </joint>\n  <gazebo reference=\"\
+  GETjag/track_left_joint\">\n    <implicitSpringDamper>1</implicitSpringDamper>\n\
+  \    <stopCfm>0</stopCfm>\n    <stopErp>0.2</stopErp>\n  </gazebo>\n  <gazebo reference=\"\
+  GETjag/track_left_link\">\n    <mu1>0.7</mu1>\n    <mu2>150</mu2>\n    <fdir1>0\
+  \ 1 0</fdir1>\n  </gazebo>\n  <link name=\"GETjag/track_right_link\">\n    <inertial>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <mass value=\"3.0\"/>\n    \
+  \  <inertia ixx=\"0.0032\" ixy=\"0\" ixz=\"0\" iyy=\"0.08\" iyz=\"0\" izz=\"0.08\"\
+  />\n    </inertial>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n\
+  \      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/GetjagTrack2.dae\"\
+  \ scale=\"0.96 1.0 0.9\"/>\n      </geometry>\n    </visual>\n    <collision>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <box size=\"\
+  0.48 0.06 0.16\"/>\n      </geometry>\n      <surface>\n        <contact>\n    \
+  \      <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision\
+  \ name=\"track_right_wheel_1_collision\">\n      <origin rpy=\"1.57079632679 1.57079632679\
+  \ 0.0\" xyz=\"0.24 0 0\"/>\n      <geometry>\n        <cylinder length=\"0.06\"\
+  \ radius=\"0.08\"/>\n      </geometry>\n      <surface>\n        <contact>\n   \
+  \       <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision\
+  \ name=\"track_right_wheel_1_collision\">\n      <origin rpy=\"1.57079632679 1.57079632679\
+  \ 0.0\" xyz=\"-0.24 0 0\"/>\n      <geometry>\n        <cylinder length=\"0.06\"\
+  \ radius=\"0.08\"/>\n      </geometry>\n      <surface>\n        <contact>\n   \
+  \       <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n  </link>\n\
+  \  <joint name=\"GETjag/track_right_joint\" type=\"revolute\">\n    <parent link=\"\
+  GETjag/base_link\"/>\n    <child link=\"GETjag/track_right_link\"/>\n    <origin\
+  \ rpy=\"0 0 0\" xyz=\"0 -0.22 0.101844\"/>\n    <axis xyz=\"0 0 1\"/>\n    <dynamics\
+  \ damping=\"1.0\"/>\n    <limit effort=\"0.0\" lower=\"0.0\" upper=\"0.0\" velocity=\"\
+  4.0\"/>\n  </joint>\n  <gazebo reference=\"GETjag/track_right_joint\">\n    <implicitSpringDamper>1</implicitSpringDamper>\n\
+  \    <stopCfm>0</stopCfm>\n    <stopErp>0.2</stopErp>\n  </gazebo>\n  <gazebo reference=\"\
+  GETjag/track_right_link\">\n    <mu1>0.7</mu1>\n    <mu2>150</mu2>\n    <fdir1>0\
+  \ 1 0</fdir1>\n  </gazebo>\n  <link name=\"GETjag/ground_clearance_1_link\">\n\t\
+  </link>\n  <joint name=\"GETjag/ground_clearance_1_joint\" type=\"fixed\">\n   \
+  \ <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/ground_clearance_1_link\"\
+  />\n    <origin rpy=\"0 1.57079632679 0\" xyz=\" 0.28  0.00 0.12\"/>\n  </joint>\n\
+  \  <gazebo reference=\"GETjag/ground_clearance_1_link\">\n    <sensor name=\"GETjag/ground_clearance_1_sensor\"\
+  \ type=\"ray\">\n      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n\
+  \          <horizontal>\n            <samples>5</samples>\n            <resolution>1.0</resolution>\n\
+  \            <min_angle>-0.18325</min_angle>\n            <max_angle>0.18325</max_angle>\n\
+  \          </horizontal>\n          <vertical>\n            <samples>5</samples>\n\
+  \            <resolution>1.0</resolution>\n            <min_angle>-0.034905</min_angle>\n\
+  \            <max_angle>0.013962</max_angle>\n          </vertical>\n        </scan>\n\
+  \        <range>\n          <min>0.075</min>\n          <max>3.0</max>\n       \
+  \   <resolution>1.0</resolution>\n        </range>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_range.so\" name=\"ground_clearance_1_plugin\">\n    \
+  \    <alwaysOn>true</alwaysOn>\n        <gaussianNoise>0.002</gaussianNoise>\n \
+  \       <updateRate>10.0</updateRate>\n        <topicName>GETjag/ground_clearance_1</topicName>\n\
+  \        <frameName>GETjag/ground_clearance_1_link</frameName>\n        <fov>0.3665</fov>\n\
+  \        <radiation>ultrasound</radiation>\n      </plugin>\n    </sensor>\n  </gazebo>\n\
+  \  <link name=\"GETjag/ground_clearance_2_link\">\n\t</link>\n  <joint name=\"GETjag/ground_clearance_2_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/ground_clearance_2_link\"\
+  />\n    <origin rpy=\"0 1.57079632679 0\" xyz=\" 0.15 -0.15 0.081\"/>\n  </joint>\n\
+  \  <gazebo reference=\"GETjag/ground_clearance_2_link\">\n    <sensor name=\"GETjag/ground_clearance_2_sensor\"\
+  \ type=\"ray\">\n      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n\
+  \          <horizontal>\n            <samples>5</samples>\n            <resolution>1.0</resolution>\n\
+  \            <min_angle>-0.18325</min_angle>\n            <max_angle>0.18325</max_angle>\n\
+  \          </horizontal>\n          <vertical>\n            <samples>5</samples>\n\
+  \            <resolution>1.0</resolution>\n            <min_angle>-0.034905</min_angle>\n\
+  \            <max_angle>0.013962</max_angle>\n          </vertical>\n        </scan>\n\
+  \        <range>\n          <min>0.035</min>\n          <max>3.0</max>\n       \
+  \   <resolution>1.0</resolution>\n        </range>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_range.so\" name=\"ground_clearance_2_plugin\">\n    \
+  \    <alwaysOn>true</alwaysOn>\n        <gaussianNoise>0.002</gaussianNoise>\n \
+  \       <updateRate>10.0</updateRate>\n        <topicName>GETjag/ground_clearance_2</topicName>\n\
+  \        <frameName>GETjag/ground_clearance_2_link</frameName>\n        <fov>0.3665</fov>\n\
+  \        <radiation>ultrasound</radiation>\n      </plugin>\n    </sensor>\n  </gazebo>\n\
+  \  <link name=\"GETjag/ground_clearance_3_link\">\n\t</link>\n  <joint name=\"GETjag/ground_clearance_3_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/ground_clearance_3_link\"\
+  />\n    <origin rpy=\"0 1.57079632679 0\" xyz=\"-0.15 -0.15 0.081\"/>\n  </joint>\n\
+  \  <gazebo reference=\"GETjag/ground_clearance_3_link\">\n    <sensor name=\"GETjag/ground_clearance_3_sensor\"\
+  \ type=\"ray\">\n      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n\
+  \          <horizontal>\n            <samples>5</samples>\n            <resolution>1.0</resolution>\n\
+  \            <min_angle>-0.18325</min_angle>\n            <max_angle>0.18325</max_angle>\n\
+  \          </horizontal>\n          <vertical>\n            <samples>5</samples>\n\
+  \            <resolution>1.0</resolution>\n            <min_angle>-0.034905</min_angle>\n\
+  \            <max_angle>0.013962</max_angle>\n          </vertical>\n        </scan>\n\
+  \        <range>\n          <min>0.035</min>\n          <max>3.0</max>\n       \
+  \   <resolution>1.0</resolution>\n        </range>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_range.so\" name=\"ground_clearance_3_plugin\">\n    \
+  \    <alwaysOn>true</alwaysOn>\n        <gaussianNoise>0.002</gaussianNoise>\n \
+  \       <updateRate>10.0</updateRate>\n        <topicName>GETjag/ground_clearance_3</topicName>\n\
+  \        <frameName>GETjag/ground_clearance_3_link</frameName>\n        <fov>0.3665</fov>\n\
+  \        <radiation>ultrasound</radiation>\n      </plugin>\n    </sensor>\n  </gazebo>\n\
+  \  <link name=\"GETjag/ground_clearance_4_link\">\n\t</link>\n  <joint name=\"GETjag/ground_clearance_4_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/ground_clearance_4_link\"\
+  />\n    <origin rpy=\"0 1.57079632679 0\" xyz=\"-0.28  0.00 0.114\"/>\n  </joint>\n\
+  \  <gazebo reference=\"GETjag/ground_clearance_4_link\">\n    <sensor name=\"GETjag/ground_clearance_4_sensor\"\
+  \ type=\"ray\">\n      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n\
+  \          <horizontal>\n            <samples>5</samples>\n            <resolution>1.0</resolution>\n\
+  \            <min_angle>-0.18325</min_angle>\n            <max_angle>0.18325</max_angle>\n\
+  \          </horizontal>\n          <vertical>\n            <samples>5</samples>\n\
+  \            <resolution>1.0</resolution>\n            <min_angle>-0.034905</min_angle>\n\
+  \            <max_angle>0.013962</max_angle>\n          </vertical>\n        </scan>\n\
+  \        <range>\n          <min>0.069</min>\n          <max>3.0</max>\n       \
+  \   <resolution>1.0</resolution>\n        </range>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_range.so\" name=\"ground_clearance_4_plugin\">\n    \
+  \    <alwaysOn>true</alwaysOn>\n        <gaussianNoise>0.002</gaussianNoise>\n \
+  \       <updateRate>10.0</updateRate>\n        <topicName>GETjag/ground_clearance_4</topicName>\n\
+  \        <frameName>GETjag/ground_clearance_4_link</frameName>\n        <fov>0.3665</fov>\n\
+  \        <radiation>ultrasound</radiation>\n      </plugin>\n    </sensor>\n  </gazebo>\n\
+  \  <!-- Imu -->\n  <joint name=\"GETjag/imu_joint\" type=\"fixed\">\n    <parent\
+  \ link=\"GETjag/base_link\"/>\n    <child link=\"GETjag/imu_link\"/>\n    <origin\
+  \ rpy=\"0 0 0\" xyz=\"0.16 0.14 0.282\"/>\n  </joint>\n  <link name=\"GETjag/imu_link\"\
+  >\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <box size=\"0.00004 0.00003 0.00002\"/>\n      </geometry>\n    </visual>\n\
+  \  </link>\n  <!-- Main Parameters -->\n  <!-- sensor namespace -->\n  <!-- Physical\
+  \ Constants -->\n  <!-- Accrelation factor -->\n  <!-- Flipper Parameters -->\n\
+  \  <!-- Sensor Tower Parameters -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between\
+  \ 0 and firstTLength -->\n  <!-- Arm parameters -->\n  <!-- MAKROS FOR WHEEL DRIVE\
+  \ -->\n  <!--  \"crate_Flipper\" AND \"create_track\" FOR EACH DRIVE -->\n  <!--\
+  \ Main Parameters -->\n  <!-- sensor namespace -->\n  <!-- Physical Constants -->\n\
+  \  <!-- Accrelation factor -->\n  <!-- Flipper Parameters -->\n  <!-- Sensor Tower\
+  \ Parameters -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should\
+  \ be between 0 and firstTLength -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Arm parameters -->\n  <!-- Create Profil -->\n  <link name=\"GETjag/tower_base_link\"\
+  >\n    <collision>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.19\"/>\n      <geometry>\n\
+  \        <box size=\"0.02 0.05 0.38\"/>\n      </geometry>\n    </collision>\n \
+  \   <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n  \
+  \      <mesh filename=\"package://getjag_description/meshes/Profil_Double_1m.dae\"\
+  \ scale=\"1 1 0.38\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"\
+  GETjag/tower_base_joint\" type=\"fixed\">\n    <parent link=\"GETjag/base_link\"\
+  />\n    <child link=\"GETjag/tower_base_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"\
+  -0.185 0.14 0.197\"/>\n  </joint>\n  <link name=\"GETjag/tower_junction_front_1_link\"\
+  >\n    <collision>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.1125\"/>\n      <geometry>\n\
+  \        <box size=\"0.02 0.05 0.225\"/>\n      </geometry>\n    </collision>\n\
+  \    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n \
+  \       <mesh filename=\"package://getjag_description/meshes/Profil_Double_1m.dae\"\
+  \ scale=\"1 1 0.225\"/>\n      </geometry>\n    </visual>\n    <inertial>\n    \
+  \  <mass value=\"0.5\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.1125\"/>\n   \
+  \   <inertia ixx=\"0.000120833333333\" ixy=\"0\" ixz=\"0\" iyy=\"0.00221354166667\"\
+  \ iyz=\"0\" izz=\"0.00212604166667\"/>\n    </inertial>\n  </link>\n  <joint name=\"\
+  GETjag/tower_junction_front_1_joint\" type=\"fixed\">\n    <parent link=\"GETjag/tower_base_link\"\
+  />\n    <child link=\"GETjag/tower_junction_front_1_link\"/>\n    <origin rpy=\"\
+  0 1.57079632679 0\" xyz=\"-0.1125 0 0.16\"/>\n  </joint>\n  <link name=\"GETjag/tower_junction_front_2_link\"\
+  >\n    <collision>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.0775\"/>\n      <geometry>\n\
+  \        <box size=\"0.02 0.05 0.155\"/>\n      </geometry>\n    </collision>\n\
+  \    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n \
+  \       <mesh filename=\"package://getjag_description/meshes/Profil_Double_1m.dae\"\
+  \ scale=\"1 1 0.155\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"\
+  GETjag/tower_junction_front_2_joint\" type=\"fixed\">\n    <parent link=\"GETjag/tower_base_link\"\
+  />\n    <child link=\"GETjag/tower_junction_front_2_link\"/>\n    <origin rpy=\"\
+  0 1.57079632679 0\" xyz=\"-0.05 0 0.38\"/>\n  </joint>\n  <!-- Add first Profil\
+  \ Sensors -->\n  <!-- Laserscanner -->\n  <link name=\"GETjag/laser_scan_rear_link\"\
+  >\n    <visual>\n      <origin rpy=\"0 -3.14159265359 0\" xyz=\"0 0 0.05\"/>\n \
+  \     <geometry>\n        <mesh filename=\"package://getjag_description/meshes/LaserSensor.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"\
+  GETjag/laser_scan_rear_joint\" type=\"fixed\">\n    <parent link=\"GETjag/tower_junction_front_1_link\"\
+  />\n    <child link=\"GETjag/laser_scan_rear_link\"/>\n    <origin rpy=\"0 1.57079632679\
+  \ 0\" xyz=\"-0.06 0 0.025\"/>\n  </joint>\n  <link name=\"GETjag/adapterbox_link\"\
+  >\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/AdapterBox.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/adapterbox_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/tower_junction_front_1_link\"/>\n \
+  \   <child link=\"GETjag/adapterbox_link\"/>\n    <origin rpy=\"1.57079632679 0\
+  \ -1.57079632679\" xyz=\"0.01 0 0.025\"/>\n  </joint>\n  <!-- HokuyoUTM -->\n  <link\
+  \ name=\"GETjag/laser_scan_front_base_link\">\n    <visual>\n      <origin rpy=\"\
+  0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass\
+  \ value=\"0.1\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <inertia ixx=\"\
+  2.83333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"2.83333333333e-05\" iyz=\"0\" izz=\"\
+  1.5e-05\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/laser_scan_front_base_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/tower_junction_front_1_link\"/>\n \
+  \   <child link=\"GETjag/laser_scan_front_base_link\"/>\n    <origin rpy=\"3.14159265359\
+  \ 1.57079632679 0\" xyz=\"-0.0475 0 0.15\"/>\n  </joint>\n  <joint name=\"GETjag/laser_scan_front_roll_joint\"\
+  \ type=\"continuous\">\n    <parent link=\"GETjag/laser_scan_front_base_link\"/>\n\
+  \    <child link=\"GETjag/laser_scan_front_roll_link\"/>\n    <origin rpy=\"0 0\
+  \ 3.14159265359\" xyz=\"-0.02 0 0\"/>\n    <!-- ${-PI_2} ${-PI_2} ${PI_2} -->\n\
+  \    <axis xyz=\"1 0 0\"/>\n    <dynamics damping=\"0.2\" friction=\"0\"/>\n   \
+  \ <limit effort=\"1.6\" velocity=\"0.5\"/>\n  </joint>\n  <gazebo>\n    <plugin\
+  \ filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_laser_scan_front_roll_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/laser_scan_front_roll_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>4.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>1</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>laser_scan_front_roll_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/laser_scan_front_roll_link\"\
+  >\n    <collision>\n      <origin rpy=\"0 0 1.57079632679\" xyz=\"0.02 0 0.01\"\
+  />\n      <geometry>\n        <box size=\"0.03 0.03 0.05\"/>\n      </geometry>\n\
+  \    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n \
+  \     <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp01.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"0 0 1.57079632679\" xyz=\"0.02 0 0.02\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"1 1 1\"\
+  />\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"0.1\"\
+  />\n      <origin rpy=\"0 0 1.57079632679\" xyz=\"0.02 0 0.01\"/>\n      <inertia\
+  \ ixx=\"2.83333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"2.83333333333e-05\" iyz=\"\
+  0\" izz=\"1.5e-05\"/>\n    </inertial>\n  </link>\n  <link name=\"GETjag/laser_scan_front_pitch_link\"\
+  >\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp02.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.2\"/>\n      <origin rpy=\"0 1.57079632679 0\" xyz=\"0 0 0.05\"/>\n      <inertia\
+  \ ixx=\"5.33333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"0.000228333333333\" iyz=\"\
+  0\" izz=\"0.000228333333333\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/laser_scan_front_pitch_joint\"\
+  \ type=\"continuous\">\n    <parent link=\"GETjag/laser_scan_front_roll_link\"/>\n\
+  \    <child link=\"GETjag/laser_scan_front_pitch_link\"/>\n    <origin rpy=\"0 0\
+  \ 0\" xyz=\"0.02 0 0.02\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics damping=\"\
+  1.0\"/>\n    <limit effort=\"1.6\" velocity=\"0.5\"/>\n  </joint>\n  <gazebo>\n\
+  \    <plugin filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_laser_scan_front_pitch_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/laser_scan_front_pitch_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>4.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>5</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>laser_scan_front_pitch_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/laser_scan_front_link\">\n  \
+  \  <visual name=\"laser_scan_front_visual\">\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/HokuyoUTM.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <collision name=\"laser_scan_front_collision\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/HokuyoUTM_Collision.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </collision>\n  </link>\n  <joint name=\"GETjag/laser_scan_front_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/laser_scan_front_pitch_link\"/>\n \
+  \   <child link=\"GETjag/laser_scan_front_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0.036\"/>\n  </joint>\n  <!-- Add second Profil Sensors -->\n  <link name=\"\
+  GETjag/laser_scan_mid_link\">\n    <visual>\n      <origin rpy=\"0 0 3.14159265359\"\
+  \ xyz=\"0 0 -0.06\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/LaserSensor.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"-1.57079632679 0 1.57079632679\" xyz=\"0.02 0 -0.1\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp05.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/laser_scan_mid_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/tower_junction_front_2_link\"/>\n \
+  \   <child link=\"GETjag/laser_scan_mid_link\"/>\n    <origin rpy=\"1.57079632679\
+  \ 0 0\" xyz=\"-0.01 -0.105 0.095\"/>\n  </joint>\n  <!-- Camera -->\n  <link name=\"\
+  GETjag/sensorhead_base_link\">\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp03.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"3.14159265359 1.57079632679 0\" xyz=\"-0.0133 0 0.03\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <collision>\n      <origin rpy=\"\
+  3.14159265359 1.57079632679 0\" xyz=\"0 0 0.03\"/>\n      <geometry>\n        <box\
+  \ size=\"0.03 0.03 0.05\"/>\n      </geometry>\n    </collision>\n    <inertial>\n\
+  \      <mass value=\"0.1\"/>\n      <origin rpy=\"0 1.57079632679 0\" xyz=\"0.0436\
+  \ 0 -0.01\"/>\n      <inertia ixx=\"2.83333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"\
+  2.83333333333e-05\" iyz=\"0\" izz=\"1.5e-05\"/>\n    </inertial>\n  </link>\n  <joint\
+  \ name=\"GETjag/sensorhead_base_joint\" type=\"fixed\">\n    <parent link=\"GETjag/tower_junction_front_2_link\"\
+  />\n    <!-- tower_junction_front_2_link -->\n    <child link=\"GETjag/sensorhead_base_link\"\
+  />\n    <origin rpy=\"0 -1.57079632679 0\" xyz=\"-0.003 0 0.075\"/>\n  </joint>\n\
+  \  <link name=\"GETjag/sensorhead_yaw_link\">\n    <visual>\n      <origin rpy=\"\
+  0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass\
+  \ value=\"0.1\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0.0 0 -0.01\"/>\n      <inertia\
+  \ ixx=\"2.83333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"2.83333333333e-05\" iyz=\"\
+  0\" izz=\"1.5e-05\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/sensorhead_yaw_joint\"\
+  \ type=\"continuous\">\n    <parent link=\"GETjag/sensorhead_base_link\"/>\n   \
+  \ <!-- sensorhead_base_link -->\n    <child link=\"GETjag/sensorhead_yaw_link\"\
+  />\n    <origin rpy=\"0 0 -1.57079632679\" xyz=\"-0.01 0 0.086\"/>\n    <axis xyz=\"\
+  0 0 1\"/>\n    <dynamics damping=\"1.0\"/>\n    <limit effort=\"6.6\" velocity=\"\
+  0.5\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\" name=\"\
+  DynamixelMotor_sensorhead_yaw_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/sensorhead_yaw_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>5</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>sensorhead_yaw_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/sensorhead_pitch_link\">\n  \
+  \  <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n   \
+  \     <mesh filename=\"package://getjag_description/meshes/Clamp02.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  0 0 3.14159265359\" xyz=\"0 0 0.03554\"/>\n      <geometry>\n        <mesh filename=\"\
+  package://getjag_description/meshes/Clamp04.dae\" scale=\"1 1 1\"/>\n      </geometry>\n\
+  \    </visual>\n    <collision>\n      <origin rpy=\"0 0 3.14159265359\" xyz=\"\
+  0 0 0.0464\"/>\n      <geometry>\n        <box size=\"0.032 0.12 0.02\"/>\n    \
+  \  </geometry>\n    </collision>\n    <collision>\n      <origin rpy=\"0 0 3.14159265359\"\
+  \ xyz=\"0.0075 0 0.0768\"/>\n      <geometry>\n        <box size=\"0.045 0.03 0.03\"\
+  />\n      </geometry>\n    </collision>\n    <inertial>\n      <mass value=\"0.6\"\
+  />\n      <origin rpy=\"0 0 0\" xyz=\"0.0 0 0.0\"/>\n      <inertia ixx=\"0.001\"\
+  \ ixy=\"0\" ixz=\"0\" iyy=\"0.001\" iyz=\"0\" izz=\"0.001\"/>\n    </inertial>\n\
+  \  </link>\n  <joint name=\"GETjag/sensorhead_pitch_joint\" type=\"continuous\"\
+  >\n    <parent link=\"GETjag/sensorhead_yaw_link\"/>\n    <!-- sensorhead_yaw_link\
+  \ -->\n    <child link=\"GETjag/sensorhead_pitch_link\"/>\n    <origin rpy=\"0 0\
+  \ 1.57079632679\" xyz=\"0 0 0\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics damping=\"\
+  1.0\"/>\n    <limit effort=\"1.6\" velocity=\"0.5\"/>\n  </joint>\n  <gazebo>\n\
+  \    <plugin filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_sensorhead_pitch_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/sensorhead_pitch_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>4.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>5</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>sensorhead_pitch_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/xtion_link\">\n    <visual name=\"\
+  xtion_visual\">\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Xtion.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/xtion_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/sensorhead_pitch_link\"/>\n    <child\
+  \ link=\"GETjag/xtion_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 0 0.0464\"/>\n\
+  \  </joint>\n  <link name=\"GETjag/thermal_camera_link\">\n    <visual name=\"thermal_camera_visual\"\
+  >\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/Camera.dae\" scale=\"1 1 1\"/>\n\
+  \      </geometry>\n    </visual>\n  </link>\n  <joint name=\"GETjag/thermal_camera_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/sensorhead_pitch_link\"/>\n    <child\
+  \ link=\"GETjag/thermal_camera_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0 0 0.06\"\
+  />\n  </joint>\n  <link name=\"GETjag/thermal_camera_sensor_link\">\n    </link>\n\
+  \  <joint name=\"GETjag/thermal_camera_sensor_joint\" type=\"fixed\">\n    <parent\
+  \ link=\"GETjag/thermal_camera_link\"/>\n    <child link=\"GETjag/thermal_camera_sensor_link\"\
+  />\n    <origin rpy=\"0 0.3 0\" xyz=\"-0.3 0.0 0.3\"/>\n  </joint>\n  <link name=\"\
+  GETjag/xtion_sensor_link\">\n    </link>\n  <joint name=\"GETjag/xtion_sensor_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/xtion_link\"/>\n    <child link=\"\
+  GETjag/xtion_sensor_link\"/>\n    <origin rpy=\"-1.57079632679 0 -1.57079632679\"\
+  \ xyz=\"0 0 0\"/>\n  </joint>\n  <gazebo reference=\"GETjag/laser_scan_mid_link\"\
+  >\n    <sensor name=\"front_laser\" type=\"gpu_ray\">\n      <visualize>false</visualize>\n\
+  \      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n          <horizontal>\n\
+  \            <samples>683</samples>\n            <resolution>1</resolution>\n  \
+  \          <min_angle>-2.09439510239</min_angle>\n            <max_angle>2.09439510239</max_angle>\n\
+  \          </horizontal>\n        </scan>\n        <range>\n          <min>0.02</min>\n\
+  \          <max>4.0</max>\n          <resolution>0.01</resolution>\n        </range>\n\
+  \        <noise>\n          <type>gaussian</type>\n          <mean>0.0</mean>\n\
+  \          <stddev>0.01</stddev>\n        </noise>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_gpu_laser.so\" name=\"laser_scan_mid_plugin\">\n    \
+  \    <topicName>GETjag/laser_scan_mid</topicName>\n        <frameName>GETjag/laser_scan_mid_link</frameName>\n\
+  \      </plugin>\n    </sensor>\n  </gazebo>\n  <gazebo reference=\"GETjag/laser_scan_rear_link\"\
+  >\n    <sensor name=\"laser_scan_rear_sensor\" type=\"gpu_ray\">\n      <visualize>false</visualize>\n\
+  \      <update_rate>10</update_rate>\n      <ray>\n        <scan>\n          <horizontal>\n\
+  \            <samples>683</samples>\n            <resolution>1</resolution>\n  \
+  \          <min_angle>-2.09439510239</min_angle>\n            <max_angle>2.09439510239</max_angle>\n\
+  \          </horizontal>\n        </scan>\n        <range>\n          <min>0.02</min>\n\
+  \          <max>4.0</max>\n          <resolution>0.01</resolution>\n        </range>\n\
+  \        <noise>\n          <type>gaussian</type>\n          <mean>0.0</mean>\n\
+  \          <stddev>0.01</stddev>\n        </noise>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_gpu_laser.so\" name=\"laser_scan_rear_plugin\">\n   \
+  \     <topicName>GETjag/laser_scan_rear</topicName>\n        <frameName>GETjag/laser_scan_rear_link</frameName>\n\
+  \      </plugin>\n    </sensor>\n  </gazebo>\n  <gazebo reference=\"GETjag/laser_scan_front_link\"\
+  >\n    <sensor name=\"laser_scan_front_sensor\" type=\"gpu_ray\">\n      <visualize>false</visualize>\n\
+  \      <update_rate>40</update_rate>\n      <ray>\n        <scan>\n          <horizontal>\n\
+  \            <samples>1081</samples>\n            <resolution>1</resolution>\n \
+  \           <min_angle>-2.35619449018</min_angle>\n            <max_angle>2.35619449018</max_angle>\n\
+  \          </horizontal>\n        </scan>\n        <range>\n          <min>0.10</min>\n\
+  \          <max>30.0</max>\n          <resolution>0.03</resolution>\n        </range>\n\
+  \        <noise>\n          <type>gaussian</type>\n          <mean>0.0</mean>\n\
+  \          <stddev>0.01</stddev>\n        </noise>\n      </ray>\n      <plugin\
+  \ filename=\"libgazebo_ros_gpu_laser.so\" name=\"laser_scan_front_plugin\">\n  \
+  \      <topicName>GETjag/laser_scan_front</topicName>\n        <frameName>GETjag/laser_scan_front_link</frameName>\n\
+  \      </plugin>\n    </sensor>\n  </gazebo>\n  <gazebo reference=\"GETjag/xtion_link\"\
+  >\n    <sensor name=\"xtion_sensor\" type=\"depth\">\n      <always_on>true</always_on>\n\
+  \      <update_rate>20.0</update_rate>\n      <camera>\n        <horizontal_fov>1.04716666667</horizontal_fov>\n\
+  \        <image>\n          <format>B8G8R8</format>\n          <width>640</width>\n\
+  \          <height>480</height>\n        </image>\n        <clip>\n          <near>0.05</near>\n\
+  \          <far>8.0</far>\n        </clip>\n      </camera>\n      <plugin filename=\"\
+  libgazebo_ros_openni_kinect.so\" name=\"xtion_plugin\">\n        <cameraName>GETjag/xtion</cameraName>\n\
+  \        <alwaysOn>true</alwaysOn>\n        <updateRate>10</updateRate>\n      \
+  \  <imageTopicName>rgb/image_raw</imageTopicName>\n        <depthImageTopicName>depth/image_raw</depthImageTopicName>\n\
+  \        <pointCloudTopicName>depth/points</pointCloudTopicName>\n        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>\n\
+  \        <depthImageCameraInfoTopicName>GETjag/depth/camera_info</depthImageCameraInfoTopicName>\n\
+  \        <frameName>GETjag/xtion_sensor_link</frameName>\n        <baseline>0.1</baseline>\n\
+  \        <distortion_k1>0.0</distortion_k1>\n        <distortion_k2>0.0</distortion_k2>\n\
+  \        <distortion_k3>0.0</distortion_k3>\n        <distortion_t1>0.0</distortion_t1>\n\
+  \        <distortion_t2>0.0</distortion_t2>\n        <pointCloudCutoff>0.4</pointCloudCutoff>\n\
+  \        <pointCloudCutoffMax>3.5</pointCloudCutoffMax>\n      </plugin>\n    </sensor>\n\
+  \  </gazebo>\n  <!-- thermal camera -->\n  <gazebo reference=\"GETjag/thermal_camera_sensor_link\"\
+  >\n    <sensor name=\"camera\" type=\"camera\">\n      <update_rate>24.0</update_rate>\n\
+  \      <camera name=\"head\">\n        <horizontal_fov>1.04716666667</horizontal_fov>\n\
+  \        <image>\n          <width>800</width>\n          <height>1000</height>\n\
+  \          <format>R8G8B8</format>\n        </image>\n        <clip>\n         \
+  \ <near>0.02</near>\n          <far>300</far>\n        </clip>\n        <noise>\n\
+  \          <type>none</type>\n          <mean>0.0</mean>\n          <stddev>0.0</stddev>\n\
+  \        </noise>\n      </camera>\n      <plugin filename=\"libgazebo_ros_camera.so\"\
+  \ name=\"camera_controller\">\n        <alwaysOn>true</alwaysOn>\n        <updateRate>0.0</updateRate>\n\
+  \        <cameraName>GETjag/thermal_camera</cameraName>\n        <imageTopicName>image_raw</imageTopicName>\n\
+  \        <cameraInfoTopicName>camera_info</cameraInfoTopicName>\n        <frameName>GETjag/thermal_camera_sensor_link</frameName>\n\
+  \        <hackBaseline>0.07</hackBaseline>\n        <distortionK1>0.0</distortionK1>\n\
+  \        <distortionK2>0.0</distortionK2>\n        <distortionK3>0.0</distortionK3>\n\
+  \        <distortionT1>0.0</distortionT1>\n        <distortionT2>0.0</distortionT2>\n\
+  \      </plugin>\n    </sensor>\n  </gazebo>\n  <!-- Setup self collide -->\n  <gazebo\
+  \ reference=\"GETjag/tower_base_link\">\n    <selfCollide>true</selfCollide>\n \
+  \ </gazebo>\n  <gazebo reference=\"GETjag/base_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/tower_junction_front_1_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/tower_junction_front_2_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/laser_scan_front_roll_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/laser_scan_front_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/sensorhead_base_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/sensorhead_pitch_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <!-- Main Parameters -->\n  <!-- sensor namespace -->\n  <!-- Physical\
+  \ Constants -->\n  <!-- Accrelation factor -->\n  <!-- Flipper Parameters -->\n\
+  \  <!-- Sensor Tower Parameters -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between\
+  \ 0 and firstTLength -->\n  <!-- Arm parameters -->\n  <!-- Main Parameters -->\n\
+  \  <!-- sensor namespace -->\n  <!-- Physical Constants -->\n  <!-- Accrelation\
+  \ factor -->\n  <!-- Flipper Parameters -->\n  <!-- Sensor Tower Parameters -->\n\
+  \  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between 0 and\
+  \ firstTLength -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Arm\
+  \ parameters -->\n  <!-- MAKROS FOR WHEEL DRIVE -->\n  <!--  \"crate_Flipper\" AND\
+  \ \"create_track\" FOR EACH DRIVE -->\n  <!-- arm -->\n  <joint name=\"GETjag/arm_base_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/base_link\"/>\n    <child link=\"\
+  GETjag/arm_base_link\"/>\n    <origin rpy=\"0 0 0\" xyz=\"0.25 -0.12 0.2308295\"\
+  />\n    <axis xyz=\"0 0 1\"/>\n    <dynamics damping=\"0.2\" friction=\"0\"/>\n\
+  \    <limit effort=\"10.0\" lower=\"-1.92\" upper=\"1.92\" velocity=\"5.0\"/>\n\
+  \  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_arm_base_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/arm_base_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>4.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>15</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>arm_base_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  \n0.077\n\t\n  <link name=\"GETjag/arm_base_link\"\
+  >\n    <collision>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.03\"/>\n      <geometry>\n\
+  \        <cylinder length=\"0.06\" radius=\"0.05\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Socket.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"0 0 1.57079632679\" xyz=\"0 -0.01777 0.1015\"/>\n      <geometry>\n    \
+  \    <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    \t\t//joint-&gt;SetVelocityLimit\
+  \ (0, max_velocity);\n\t\t\n    <visual>\n      <origin rpy=\"0 0 -1.57079632679\"\
+  \ xyz=\"0 0.0172288 0.1015\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"3.14159265359 -1.57079632679 0\" xyz=\"0 0.01708 0.0606\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  3.14159265359 -1.57079632679 0\" xyz=\"0 -0.018378 0.0606\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.2\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0.03\"/>\n      <inertia ixx=\"0.000185\"\
+  \ ixy=\"0\" ixz=\"0\" iyy=\"0.000185\" iyz=\"0\" izz=\"0.00025\"/>\n    </inertial>\n\
+  \  </link>\n  <joint name=\"GETjag/arm_shoulder_joint\" type=\"revolute\">\n   \
+  \ <parent link=\"GETjag/arm_base_link\"/>\n    <child link=\"GETjag/arm_shoulder_link\"\
+  />\n    <origin rpy=\"0 -3.14159265359 0\" xyz=\"0 0 0.1015\"/>\n    <axis xyz=\"\
+  0 1 0\"/>\n    <dynamics damping=\"0.2\" friction=\"0\"/>\n    <limit effort=\"\
+  80.0\" lower=\"0.0\" upper=\"3.14159265359\" velocity=\"5.0\"/>\n  </joint>\n  <gazebo>\n\
+  \    <plugin filename=\"libDynamixelMotor.so\" name=\"DynamixelMotor_arm_shoulder_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/arm_shoulder_joint</joint>\n\
+  \      <null_position>0.0</null_position>\n      <P>2.0</P>\n      <I>0.2</I>\n\
+  \      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n      <max_force>8</max_force>\n\
+  \      <update_rate>50</update_rate>\n      <base_topic_name>arm_shoulder_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_shoulder_link\">\n    <collision>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"0.2293539 0 0\"/>\n      <geometry>\n       \
+  \ <box size=\"0.42 0.035 0.035\"/>\n      </geometry>\n      <surface>\n       \
+  \ <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <visual>\n\
+  \      <origin rpy=\"0 0 0\" xyz=\"0.0193539 0 0\"/>\n      <geometry>\n       \
+  \ <mesh filename=\"package://getjag_description/meshes/Shoulder.dae\" scale=\"1\
+  \ 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp07.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"0 -3.14159265359 0\" xyz=\"0.4015 0 0\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"1 1 1\"/>\n\
+  \      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"3.14159265359\
+  \ 0 0\" xyz=\"0.403683 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"1.57079632679 0 1.57079632679\" xyz=\"0.4445 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.3\"/>\n      <origin rpy=\"0 0 0\" xyz=\"0.2293539 0 0\"/>\n      <inertia ixx=\"\
+  6.125e-05\" ixy=\"0\" ixz=\"0\" iyy=\"0.004440625\" iyz=\"0\" izz=\"0.004440625\"\
+  />\n    </inertial>\n  </link>\n  <joint name=\"GETjag/arm_elbow_joint\" type=\"\
+  revolute\">\n    <parent link=\"GETjag/arm_shoulder_link\"/>\n    <child link=\"\
+  GETjag/arm_elbow_link\"/>\n    <origin rpy=\"0 3.14159265359 3.14159265359\" xyz=\"\
+  0.4445 0 0\"/>\n    <!-- ${0} ${-PI} ${PI} -->\n    <axis xyz=\"0 1 0\"/>\n    <dynamics\
+  \ damping=\"0.2\" friction=\"0\"/>\n    <limit effort=\"80.0\" lower=\"-0.1\" upper=\"\
+  3.14159265359\" velocity=\"5.0\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"\
+  libDynamixelMotor.so\" name=\"DynamixelMotor_arm_elbow_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/arm_elbow_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>2.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>5</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>arm_elbow_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_elbow_link\">\n    <collision>\n\
+  \      <origin rpy=\"0 0 -3.14159265359\" xyz=\"-0.1413634 0 0.0532884\"/>\n   \
+  \   <geometry>\n        <box size=\"0.31 0.035 0.035\"/>\n      </geometry>\n  \
+  \    <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp02.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"0 -1.57079632679 0\" xyz=\"0 0 0.0378\"/>\n      <geometry>\n        <mesh\
+  \ filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"1 1 1\"/>\n\
+  \      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"0 0 -3.14159265359\"\
+  \ xyz=\"0.0136366 0 0.0532884\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Elbow.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"3.14159265359 0 0\" xyz=\"-0.226362 0 0.048423\"/>\n      <geometry>\n \
+  \       <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  1.57079632679 0 -3.14159265359\" xyz=\"-0.2285233 0 0.0508\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  3.14159265359 1.57079632679 0\" xyz=\"-0.2697 0 0.05\"/>\n      <geometry>\n   \
+  \     <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.3\"/>\n      <origin rpy=\"0 0 -3.14159265359\" xyz=\"-0.1413634 0 0.0532884\"\
+  />\n      <inertia ixx=\"6.125e-05\" ixy=\"0\" ixz=\"0\" iyy=\"0.002433125\" iyz=\"\
+  0\" izz=\"0.002433125\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/arm_wrist_yaw_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/arm_elbow_link\"/>\n    <child link=\"\
+  GETjag/arm_wrist_yaw_link\"/>\n    <origin rpy=\"1.57079632679 0 -1.57079632679\"\
+  \ xyz=\"-0.2697 0 0.0502\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics damping=\"\
+  0.2\" friction=\"0\"/>\n    <limit effort=\"1.6\" lower=\"-1.31\" upper=\"1.31\"\
+  \ velocity=\"5.0\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\"\
+  \ name=\"DynamixelMotor_arm_wrist_yaw_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/arm_wrist_yaw_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>5</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>arm_wrist_yaw_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_wrist_yaw_link\">\n    <collision>\n\
+  \      <origin rpy=\"0 1.57079632679 3.14159265359\" xyz=\"0 0 0.0672\"/>\n    \
+  \  <geometry>\n        <box size=\"0.05 0.03 0.03\"/>\n      </geometry>\n     \
+  \ <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp02.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"-1.57079632679 -1.57079632679 0\" xyz=\"0 0 0.0365449\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  0 0 3.14159265359\" xyz=\"0 0 0.0772\"/>\n      <geometry>\n        <mesh filename=\"\
+  package://getjag_description/meshes/Dynamixel.dae\"/>\n      </geometry>\n    </visual>\n\
+  \    <inertial>\n      <mass value=\"0.1\"/>\n      <origin rpy=\"0 1.57079632679\
+  \ 3.14159265359\" xyz=\"0 0 0.0672\"/>\n      <inertia ixx=\"2.83333333333e-05\"\
+  \ ixy=\"0\" ixz=\"0\" iyy=\"2.83333333333e-05\" iyz=\"0\" izz=\"1.5e-05\"/>\n  \
+  \  </inertial>\n  </link>\n  <joint name=\"GETjag/arm_wrist_pitch_joint\" type=\"\
+  revolute\">\n    <parent link=\"GETjag/arm_wrist_yaw_link\"/>\n    <child link=\"\
+  GETjag/arm_wrist_pitch_link\"/>\n    <origin rpy=\"-1.57079632679 -1.57079632679\
+  \ 0\" xyz=\"0 0 0.07236\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics damping=\"\
+  0.2\" friction=\"0\"/>\n    <limit effort=\"1.6\" lower=\"-1.31\" upper=\"1.31\"\
+  \ velocity=\"5.0\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\"\
+  \ name=\"DynamixelMotor_arm_wrist_pitch_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/arm_wrist_pitch_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>5</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>arm_wrist_pitch_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_wrist_pitch_link\">\n   \
+  \ <collision>\n      <origin rpy=\"0 0 0\" xyz=\"0.0436 0 0.01\"/>\n      <geometry>\n\
+  \        <box size=\"0.03 0.03 0.05\"/>\n      </geometry>\n      <surface>\n  \
+  \      <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n        \
+  \    <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n      </surface>\n\
+  \    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n \
+  \     <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp08.dae\"\
+  />\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"3.14159265359\
+  \ 0 0\" xyz=\"0.0436 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\"\
+  />\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"0.1\"\
+  />\n      <origin rpy=\"0 1.57079632679 0\" xyz=\"0.0436 0 -0.01\"/>\n      <inertia\
+  \ ixx=\"2.83333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"2.83333333333e-05\" iyz=\"\
+  0\" izz=\"1.5e-05\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/arm_wrist_roll_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/arm_wrist_pitch_link\"/>\n    <child\
+  \ link=\"GETjag/arm_wrist_roll_link\"/>\n    <origin rpy=\"1.57079632679 0 0\" xyz=\"\
+  0.0631 0 0\"/>\n    <axis xyz=\"1 0 0\"/>\n    <dynamics damping=\"0.2\" friction=\"\
+  0\"/>\n    <limit effort=\"1.6\" lower=\"-1.31\" upper=\"1.31\" velocity=\"5.0\"\
+  />\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\" name=\"\
+  DynamixelMotor_arm_wrist_roll_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/arm_wrist_roll_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>5</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>arm_wrist_roll_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_wrist_roll_link\">\n    <collision>\n\
+  \      <origin rpy=\"-3.14159265359 1.57079632679 1.57079632679\" xyz=\"0.02 0 -0.01\"\
+  />\n      <geometry>\n        <box size=\"0.05 0.03 0.03\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"\
+  0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin\
+  \ rpy=\"-3.14159265359 1.57079632679 0\" xyz=\"0.02 0 0.02\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp06.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  -3.14159265359 0 1.57079632679\" xyz=\"0.02 0 -0.02\"/>\n      <geometry>\n    \
+  \    <mesh filename=\"package://getjag_description/meshes/Dynamixel.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <visual>\n      <origin rpy=\"\
+  -1.57079632679 0 0\" xyz=\"0.02 0.04336 -0.011389\"/>\n      <geometry>\n      \
+  \  <mesh filename=\"package://getjag_description/meshes/HandCamera.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.2\"/>\n      <origin rpy=\"-1.57079632679 0 0\" xyz=\"0.03861 0 0.022\"/>\n  \
+  \    <inertia ixx=\"0.000121666666667\" ixy=\"0\" ixz=\"0\" iyy=\"0.000346666666667\"\
+  \ iyz=\"0\" izz=\"0.000255\"/>\n    </inertial>\n  </link>\n  <joint name=\"GETjag/arm_gripper_joint\"\
+  \ type=\"revolute\">\n    <parent link=\"GETjag/arm_wrist_roll_link\"/>\n    <child\
+  \ link=\"GETjag/arm_gripper_link\"/>\n    <origin rpy=\"-1.57079632679 1.57079632679\
+  \ -1.57079632679\" xyz=\"0.02 0 -0.02\"/>\n    <axis xyz=\"0 1 0\"/>\n    <dynamics\
+  \ damping=\"0.2\" friction=\"0\"/>\n    <limit effort=\"1.6\" lower=\"-1.31\" upper=\"\
+  1.31\" velocity=\"5.0\"/>\n  </joint>\n  <gazebo>\n    <plugin filename=\"libDynamixelMotor.so\"\
+  \ name=\"DynamixelMotor_arm_gripper_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/arm_gripper_joint</joint>\n      <null_position>0.0</null_position>\n\
+  \      <P>4.0</P>\n      <I>0.2</I>\n      <D>0.1</D>\n      <max_velocity>1.0</max_velocity>\n\
+  \      <max_force>4</max_force>\n      <update_rate>50</update_rate>\n      <base_topic_name>arm_gripper_controller</base_topic_name>\n\
+  \    </plugin>\n  </gazebo>\n  <link name=\"GETjag/arm_gripper_finger_left_link\"\
+  >\n    <collision>\n      <origin rpy=\"1.57079632679 0 0\" xyz=\"0 0 0\"/>\n  \
+  \    <geometry>\n        <box size=\"0.025 0.002 0.0368\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision>\n      <origin rpy=\"1.57079632679\
+  \ -0.45 0\" xyz=\"0.0275 0 0.0073\"/>\n      <geometry>\n        <box size=\"0.0321\
+  \ 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n        <contact>\n    \
+  \      <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision>\n\
+  \      <origin rpy=\"1.57079632679 0.3 0\" xyz=\"0.068 0 0.007\"/>\n      <geometry>\n\
+  \        <box size=\"0.0527 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision>\n      <origin rpy=\"1.57079632679\
+  \ 1.2 0\" xyz=\"0.0977 0 -0.0122\"/>\n      <geometry>\n        <box size=\"0.0257\
+  \ 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n        <contact>\n    \
+  \      <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision>\n\
+  \      <origin rpy=\"1.57079632679 0.415 0\" xyz=\"0.1025 0 -0.024\"/>\n      <geometry>\n\
+  \        <cylinder length=\"0.0368\" radius=\"0.005\"/>\n      </geometry>\n   \
+  \   <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"-1.57079632679\
+  \ 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/LeftHand.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <gazebo reference=\"\
+  GETjag/arm_gripper_finger_left_link\">\n    <selfCollide>true</selfCollide>\n  \
+  \  <mu1 value=\"10\"/>\n    <mu2 value=\"3\"/>\n  </gazebo>\n  <joint name=\"GETjag/arm_gripper_finger_left_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/arm_wrist_roll_link\"/>\n    <child\
+  \ link=\"GETjag/arm_gripper_finger_left_link\"/>\n    <origin rpy=\"0.02361 0 0.022\"\
+  \ xyz=\"0.02361 0 0.022\"/>\n  </joint>\n  <link name=\"GETjag/arm_gripper_link\"\
+  >\n    <visual>\n      <origin rpy=\"0 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n\
+  \        <mesh filename=\"package://getjag_description/meshes/Clamp08.dae\" scale=\"\
+  1 1 1\"/>\n      </geometry>\n    </visual>\n    <inertial>\n      <mass value=\"\
+  0.1\"/>\n      <origin rpy=\"-1.57079632679 -1.57079632679 0\" xyz=\"0.04155 0 0\"\
+  />\n      <inertia ixx=\"6.08333333333e-05\" ixy=\"0\" ixz=\"0\" iyy=\"0.000173333333333\"\
+  \ iyz=\"0\" izz=\"0.0001275\"/>\n    </inertial>\n  </link>\n  <link name=\"GETjag/arm_gripper_finger_right_link\"\
+  >\n    <collision>\n      <origin rpy=\"1.57079632679 0 0\" xyz=\"0 0 0\"/>\n  \
+  \    <geometry>\n        <box size=\"0.025 0.002 0.0368\"/>\n      </geometry>\n\
+  \      <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <collision>\n      <origin rpy=\"1.57079632679\
+  \ 0.45 0\" xyz=\"0.0275 0 -0.0073\"/>\n      <geometry>\n        <box size=\"0.0321\
+  \ 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n        <contact>\n    \
+  \      <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision>\n\
+  \      <origin rpy=\"1.57079632679 -0.28 0\" xyz=\"0.068 0 -0.007\"/>\n      <geometry>\n\
+  \        <box size=\"0.0527 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n\
+  \        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n      \
+  \      <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n    \
+  \  </surface>\n    </collision>\n    <collision>\n      <origin rpy=\"1.57079632679\
+  \ -1.16 0\" xyz=\"0.09787 0 0.0111\"/>\n      <geometry>\n        <box size=\"0.0257\
+  \ 0.002 0.0368\"/>\n      </geometry>\n      <surface>\n        <contact>\n    \
+  \      <ode>\n            <max_vel>0.0</max_vel>\n            <min_depth>0.001</min_depth>\n\
+  \          </ode>\n        </contact>\n      </surface>\n    </collision>\n    <collision>\n\
+  \      <origin rpy=\"1.57079632679 0 0\" xyz=\"0.10272 0 0.0227\"/>\n      <geometry>\n\
+  \        <cylinder length=\"0.0368\" radius=\"0.005\"/>\n      </geometry>\n   \
+  \   <surface>\n        <contact>\n          <ode>\n            <max_vel>0.0</max_vel>\n\
+  \            <min_depth>0.001</min_depth>\n          </ode>\n        </contact>\n\
+  \      </surface>\n    </collision>\n    <visual>\n      <origin rpy=\"-1.57079632679\
+  \ 0 0\" xyz=\"0 0 0\"/>\n      <geometry>\n        <mesh filename=\"package://getjag_description/meshes/RightHand.dae\"\
+  \ scale=\"1 1 1\"/>\n      </geometry>\n    </visual>\n  </link>\n  <joint name=\"\
+  GETjag/arm_gripper_finger_right_joint\" type=\"fixed\">\n    <parent link=\"GETjag/arm_gripper_link\"\
+  />\n    <child link=\"GETjag/arm_gripper_finger_right_link\"/>\n    <origin rpy=\"\
+  0 -1.57079632679 0\" xyz=\"0.02655 0 0\"/>\n  </joint>\n  <gazebo reference=\"GETjag/arm_gripper_finger_right_link\"\
+  >\n    <selfCollide>true</selfCollide>\n    <mu1 value=\"10\"/>\n    <mu2 value=\"\
+  3\"/>\n  </gazebo>\n  <!-- arm camera link -->\n  <joint name=\"GETjag/arm_camera_joint\"\
+  \ type=\"fixed\">\n    <parent link=\"GETjag/arm_wrist_roll_link\"/>\n    <child\
+  \ link=\"GETjag/arm_camera_link\"/>\n    <origin rpy=\"-1.57079632679 0 -0.25\"\
+  \ xyz=\"0.02 0.04336 -0.011389\"/>\n  </joint>\n  <link name=\"GETjag/arm_camera_link\"\
+  >\n\n\t</link>\n  <gazebo reference=\"GETjag/arm_shoulder_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_elbow_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_wrist_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_wrist_yaw_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_wrist_pitch_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_wrist_roll_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_gripper_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <gazebo reference=\"GETjag/arm_gripper_hand_link\">\n    <selfCollide>true</selfCollide>\n\
+  \  </gazebo>\n  <!-- gripper camera -->\n  <gazebo reference=\"GETjag/arm_camera_link\"\
+  >\n    <sensor name=\"camera\" type=\"camera\">\n      <update_rate>30.0</update_rate>\n\
+  \      <camera name=\"head\">\n        <horizontal_fov>1.3962634</horizontal_fov>\n\
+  \        <image>\n          <width>640</width>\n          <height>480</height>\n\
+  \          <format>R8G8B8</format>\n        </image>\n        <clip>\n         \
+  \ <near>0.02</near>\n          <far>300</far>\n        </clip>\n        <noise>\n\
+  \          <type>gaussian</type>\n          <mean>0.0</mean>\n          <stddev>0.007</stddev>\n\
+  \        </noise>\n      </camera>\n      <plugin filename=\"libgazebo_ros_camera.so\"\
+  \ name=\"camera_controller\">\n        <alwaysOn>true</alwaysOn>\n        <updateRate>0.0</updateRate>\n\
+  \        <cameraName>GETjag/camera_gripper</cameraName>\n        <imageTopicName>image_raw</imageTopicName>\n\
+  \        <cameraInfoTopicName>camera_info</cameraInfoTopicName>\n        <frameName>GETjag/arm_camera_link</frameName>\n\
+  \        <hackBaseline>0.07</hackBaseline>\n        <distortionK1>0.0</distortionK1>\n\
+  \        <distortionK2>0.0</distortionK2>\n        <distortionK3>0.0</distortionK3>\n\
+  \        <distortionT1>0.0</distortionT1>\n        <distortionT2>0.0</distortionT2>\n\
+  \      </plugin>\n    </sensor>\n  </gazebo>\n  <!-- Created on: Jun 26, 2017 Author:\
+  \ Philip Frieling -->\n  <!-- Main Parameters -->\n  <!-- sensor namespace -->\n\
+  \  <!-- Physical Constants -->\n  <!-- Accrelation factor -->\n  <!-- Flipper Parameters\
+  \ -->\n  <!-- Sensor Tower Parameters -->\n  <!-- Should be between 0 and firstTLength\
+  \ -->\n  <!-- Should be between 0 and firstTLength -->\n  <!-- Should be between\
+  \ 0 and firstTLength -->\n  <!-- Arm parameters -->\n  <gazebo>\n    <plugin filename=\"\
+  libgazebo_ros_control.so\" name=\"gazebo_ros_control\">\n      <robotNamespace>/GETjag</robotNamespace>\n\
+  \    </plugin>\n  </gazebo>\n  <!-- ros_control plugin -->\n  <gazebo>\n    <plugin\
+  \ filename=\"libSimpleTrackedVehiclePlugin.so\" name=\"simple_tracked_vehicle\"\
+  >\n      <body>GETjag/base_link</body>\n      <left_track>GETjag/track_left_link</left_track>\n\
+  \      <left_front_flipper>GETjag/flipper_front_left_link</left_front_flipper>\n\
+  \      <left_back_flipper>GETjag/flipper_rear_left_link</left_back_flipper>\n  \
+  \    <right_track>GETjag/track_right_link</right_track>\n      <right_front_flipper>GETjag/flipper_front_right_link</right_front_flipper>\n\
+  \      <right_back_flipper>GETjag/flipper_rear_right_link</right_back_flipper>\n\
+  \      <commandTopic>GETjag/cmd_vel</commandTopic>\n      <odometryTopic>GETjag/odom</odometryTopic>\n\
+  \      <odometryFrame>GETjag/odom</odometryFrame>\n      <publish_tf>true</publish_tf>\n\
+  \      <updateRate>100</updateRate>\n      <robotBaseFrame>GETjag/base_link</robotBaseFrame>\n\
+  \      <steering_efficiency>0.5</steering_efficiency>\n      <tracks_separation>0.5\n\
+  \t\t\t\t</tracks_separation>\n      <linear_speed_gain>1.0</linear_speed_gain>\n\
+  \      <angular_speed_gain>1.0</angular_speed_gain>\n      <track_accel>1.5</track_accel>\n\
+  \      <max_linear_speed>100</max_linear_speed>\n      <track_mu>0.8</track_mu>\n\
+  \      <track_mu2>1.0</track_mu2>\n      <rosDebugLevel>na</rosDebugLevel>\n   \
+  \ </plugin>\n    <plugin filename=\"libtfPublisher.so\" name=\"tfPublisher_flipper_front_left_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/flipper_front_left_joint</joint>\n\
+  \      <update_rate>50</update_rate>\n    </plugin>\n    <plugin filename=\"libtfPublisher.so\"\
+  \ name=\"tfPublisher_flipper_front_right_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/flipper_front_right_joint</joint>\n      <update_rate>50</update_rate>\n\
+  \    </plugin>\n    <plugin filename=\"libtfPublisher.so\" name=\"tfPublisher_flipper_rear_left_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/flipper_rear_left_joint</joint>\n\
+  \      <update_rate>50</update_rate>\n    </plugin>\n    <plugin filename=\"libtfPublisher.so\"\
+  \ name=\"tfPublisher_flipper_rear_right_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/flipper_rear_right_joint</joint>\n      <update_rate>50</update_rate>\n\
+  \    </plugin>\n    <plugin filename=\"libtfPublisher.so\" name=\"tfPublisher_track_left_joint\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <joint>GETjag/track_left_joint</joint>\n\
+  \      <update_rate>50</update_rate>\n    </plugin>\n    <plugin filename=\"libtfPublisher.so\"\
+  \ name=\"tfPublisher_track_right_joint\">\n      <robot_namespace>GETjag</robot_namespace>\n\
+  \      <joint>GETjag/track_right_joint</joint>\n      <update_rate>50</update_rate>\n\
+  \    </plugin>\n    <plugin filename=\"libtfPublisher.so\" name=\"tfPublisher_base_link\"\
+  >\n      <robot_namespace>GETjag</robot_namespace>\n      <base_link_mode>true</base_link_mode>\n\
+  \      <update_rate>50</update_rate>\n    </plugin>\n    <!-- \n\n\t\t\t<plugin\
+  \ name=\"joint_state_publisher\" filename=\"libgazebo_ros_joint_state_publisher.so\"\
+  >\n\t\t\t\t<jointName>\n\n\t\t\t\t\t${j_ns}flipper_front_joint,\n\t\t\t\t\t${j_ns}flipper_front_left_joint,\
+  \ ${j_ns}flipper_front_right_joint,\n\n\t\t\t\t\t${j_ns}flipper_rear_joint,\n\t\t\
+  \t\t\t${j_ns}flipper_rear_left_joint, ${j_ns}flipper_rear_right_joint,\n\n\t\t\t\
+  \t\t${j_ns}track_left_joint, ${j_ns}track_right_joint,\n\n\t\t\t\t\t${j_ns}arm_base_joint,\
+  \ ${j_ns}arm_shoulder_joint, ${j_ns}arm_elbow_joint, ${j_ns}arm_wrist_yaw_joint,\n\
+  \t\t\t\t\t${j_ns}arm_wrist_roll_joint, ${j_ns}arm_wrist_pitch_joint, ${j_ns}arm_gripper_joint,\n\
+  \n\t\t\t\t\t${j_ns}laser_scan_front_roll_joint, ${j_ns}laser_scan_front_pitch_joint,\n\
+  \t\t\t\t\t${j_ns}sensorhead_yaw_joint, ${j_ns}sensorhead_pitch_joint\n\t\t\t\t</jointName>\n\
+  \t\t\t\t<updateRate>100</updateRate>\n\t\t\t</plugin> -->\n  </gazebo>\n  <!-- imu\
+  \ -->\n  <gazebo>\n    <plugin filename=\"libgazebo_ros_imu.so\" name=\"imu_plugin\"\
+  >\n      <alwaysOn>true</alwaysOn>\n      <bodyName>GETjag/imu_link</bodyName>\n\
+  \      <frameName>GETjag/imu_link</frameName>\n      <topicName>GETjag/imu/data</topicName>\n\
+  \      <serviceName>GETjag/imu/service</serviceName>\n      <gaussianNoise>0.0</gaussianNoise>\n\
+  \      <updateRate>100.0</updateRate>\n    </plugin>\n  </gazebo>\n  <gazebo reference=\"\
+  GETjag/chassis\">\n    <selfCollide>true</selfCollide>\n  </gazebo>\n</robot>\n\n"
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_getpc17__33205: 'http://getpc17:33205/', host_getpc17__33537: 'http://getpc17:33537/',
+    host_getpc17__33735: 'http://getpc17:33735/', host_getpc17__35317: 'http://getpc17:35317/',
+    host_getpc17__37399: 'http://getpc17:37399/', host_getpc17__39161: 'http://getpc17:39161/',
+    host_getpc17__39499: 'http://getpc17:39499/', host_getpc17__41475: 'http://getpc17:41475/',
+    host_getpc17__41887: 'http://getpc17:41887/'}
+rosversion: '1.12.14
+
+  '
+run_id: ee026acc-4cd2-11e9-be37-3417eb9cc1ea
+use_sim_time: true

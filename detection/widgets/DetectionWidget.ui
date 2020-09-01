@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DetectionWidget</class>
+ <widget class="QWidget" name="DetectionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>801</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Tab 1</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,1">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,32,0,0,0,0,2,2,0,0,0,2">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_10"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="3,10,1,1">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Load Profile:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBoxLoadProfile"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonDeleteProfile">
+               <property name="text">
+                <string>DeleteProfile</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonRefresh">
+               <property name="text">
+                <string>Refresh</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_17">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>CurrentModels</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_9"/>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>      ActiveModels</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1,0">
+             <item>
+              <widget class="QListWidget" name="listAvaliableModels"/>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QPushButton" name="pushButtonAddModel">
+                 <property name="text">
+                  <string>&gt;&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonRemoveModel">
+                 <property name="text">
+                  <string>&lt;&lt;</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QListWidget" name="listActiveModels"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <item>
+              <widget class="QLineEdit" name="lineEditSaveProfile"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonSaveProfile">
+               <property name="text">
+                <string>Save Profile</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>14</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="Line" name="line_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="3,1">
+             <item>
+              <widget class="QLabel" name="labelModelPath">
+               <property name="text">
+                <string>/home/satishj/ros/src/dexterity/database</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOpen">
+               <property name="text">
+                <string>Open</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="3,1">
+             <item>
+              <widget class="QLineEdit" name="lineEditModelName"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonAddModel_2">
+               <property name="text">
+                <string>Add Model</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>14</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QComboBox" name="comboBoxDeleteModel"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonDeleteModel">
+               <property name="text">
+                <string>Delete Model</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,30,2,0">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_22"/>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tableWidget"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QPushButton" name="pushButtonPublish">
+               <property name="text">
+                <string>Publish</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonReset">
+               <property name="text">
+                <string>Reset</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Visualizer">
+      <attribute name="title">
+       <string>Tab 2</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_12">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="3,0">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="20,2,2">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_15"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,1,1,1">
+             <item>
+              <widget class="QPushButton" name="pushButtonTrigger">
+               <property name="text">
+                <string>Trigger</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonStartDetection">
+               <property name="text">
+                <string>Start Continuous</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonStopDetection">
+               <property name="text">
+                <string>Stop Continuous</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="2,1">
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonLoadScene">
+               <property name="text">
+                <string>Load Scene</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,5,0,0">
+           <item>
+            <layout class="QFormLayout" name="formLayout">
+             <property name="horizontalSpacing">
+              <number>10</number>
+             </property>
+             <item row="3" column="0">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>estimatorSize</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>keypointSize</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>denseSize</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="horizontalSpacing">
+              <number>99</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>1</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>ShowCorrespondences</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_2">
+               <property name="text">
+                <string>ShowDense</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_3">
+               <property name="text">
+                <string>Esti&amp;matedObject</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBox_4">
+               <property name="text">
+                <string>MatchingCo&amp;lor</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBox_5">
+               <property name="text">
+                <string>&amp;Keypoints</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBox_6">
+               <property name="text">
+                <string>Normal</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBox_7">
+               <property name="text">
+                <string>ReferenceFra&amp;me</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBox_8">
+               <property name="text">
+                <string>Winner</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="0,1">
+             <item>
+              <widget class="QLineEdit" name="lineEdit">
+               <property name="text">
+                <string>/GETjag/base_link</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Frame Id</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1,1">
+             <item>
+              <widget class="QComboBox" name="comboBoxTopics"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>PointCloud Topic</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButtonAddModel</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>moveToActive()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonRemoveModel</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>removeItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>197</x>
+     <y>337</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonOpen</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonAddModel_2</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>addModel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>536</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonDeleteModel</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>deleteModel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>580</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonPublish</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>publishParameter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>504</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonSaveProfile</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>saveProfile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>732</x>
+     <y>579</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBoxLoadProfile</sender>
+   <signal>activated(QString)</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>loadProfile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonRefresh</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>refresh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonReset</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>loadParameter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>700</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBoxTopics</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>changeCameraTopic(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonLoadScene</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>loadScene()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>427</x>
+     <y>564</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonTrigger</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>triggerDetection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonStartDetection</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>startDetection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonStopDetection</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>stopDetection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>429</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>604</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_2</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>570</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_3</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_4</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_5</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>564</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_6</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_7</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>308</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_8</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_3</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>setCloudVisualizer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonDeleteProfile</sender>
+   <signal>clicked()</signal>
+   <receiver>DetectionWidget</receiver>
+   <slot>deleteProfile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>moveToActive()</slot>
+  <slot>removeItem()</slot>
+  <slot>setFolder()</slot>
+  <slot>addModel()</slot>
+  <slot>deleteModel()</slot>
+  <slot>publishParameter()</slot>
+  <slot>loadProfile()</slot>
+  <slot>saveProfile()</slot>
+  <slot>refresh()</slot>
+  <slot>loadParameter()</slot>
+  <slot>changeCameraTopic(QString)</slot>
+  <slot>loadScene()</slot>
+  <slot>triggerDetection()</slot>
+  <slot>startDetection()</slot>
+  <slot>stopDetection()</slot>
+  <slot>setCloudVisualizer()</slot>
+  <slot>deleteProfile()</slot>
+ </slots>
+</ui>

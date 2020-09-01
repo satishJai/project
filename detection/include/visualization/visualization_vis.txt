@@ -1,0 +1,77 @@
+/*
+ * visualization.h
+ *
+ *  Created on: Dec 3, 2018
+ *      Author: philipf
+ */
+
+#ifndef SRC_DEXTERITY_DETECTION_INCLUDE_VISUALIZATION_VISUALIZATION_VIS_TXT_
+#define SRC_DEXTERITY_DETECTION_INCLUDE_VISUALIZATION_VISUALIZATION_VIS_TXT_
+
+#include <pcl/point_cloud.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/correspondence.h>
+#include <pcl/point_types.h>
+#include "../Segment.h"
+#include "../Model.h"
+#include "../Blackboard.h"
+#include "../RosParameter.h"
+#include "../RosParameterManager.h"
+
+class Visualization
+{
+	public:
+		Visualization();
+		~Visualization();
+		//Viewer needs to know the blackboad, to get a link to all clouds
+		void init(std::shared_ptr<Blackboard> gBoard);
+		//Update the viewer, draws all new scene clouds. Is not redrawing the models!
+		void spinOnce();
+		//Redraws the models
+		void drawModels();
+		//Each model will be placed with an offset next to the other model
+		tf::Vector3 getModelOffset();
+
+	protected:
+		//Parameters to configure the viewer
+		RosParameter<bool>::Ptr showKeypoints;
+		RosParameter<bool>::Ptr showNormals;
+		RosParameter<bool>::Ptr showDense;
+		RosParameter<bool>::Ptr showCorrespondences;
+		RosParameter<bool>::Ptr showEstimatedObjects;
+		RosParameter<bool>::Ptr showReferenceFrames;
+		RosParameter<bool>::Ptr showAllCorrespondences;
+		RosParameter<bool>::Ptr showMatchingColor;
+		RosParameter<bool>::Ptr showOnlyWinner;
+		RosParameter<bool>::Ptr showVoting;
+		RosParameter<bool>::Ptr useModelOffset;
+		RosParameter<double>::Ptr denseSize;
+		RosParameter<double>::Ptr keypointSize;
+		RosParameter<double>::Ptr estimationSize;
+
+		tf::Vector3 modelOffset = tf::Vector3(0.2,0.0,0.25); //tf::Vector3(0.2,0,0.25)
+		bool dirty = true;
+
+	private:
+		void removeAllSegments();
+		void drawCloud(ProcessedCloud *data, bool isModel, unsigned int id, tf::Vector3 modelOffset = tf::Vector3(0,0,0));
+		void drawAllCorrespondences(Segment *seg, std::string id);
+		void drawCorrespondences(Segment *seg, Result *result, Model *model, std::string id);
+
+		pcl::visualization::PCLVisualizer viewer;
+		std::shared_ptr<Blackboard> board;
+		std::vector<std::string> arrows;
+		std::vector<std::string> lines;
+		std::vector<std::string> detectedClouds;
+		std::vector<std::string> spheres;
+		std::vector<std::string> rfs;
+		std::vector<std::string> cloudSegments;
+		//Latest drawn state
+		unsigned long counter = 42;
+		unsigned long lastDrawnState = 0;
+		double r,g,b;
+		long colorCounter;
+};
+
+#endif /* SRC_DEXTERITY_DETECTION_INCLUDE_VISUALIZATION_VISUALIZATION_VIS_TXT_ */

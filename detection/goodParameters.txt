@@ -1,0 +1,166 @@
+camera:
+  camera_nodelet_manager: {num_worker_threads: 4}
+  depth:
+    image:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    image_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    image_rect:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    image_rect_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+  depth_rectify_depth: {interpolation: 0}
+  depth_registered:
+    image_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    sw_registered:
+      image_rect:
+        compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+        compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+        theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+      image_rect_raw:
+        compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+        compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+        theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+  driver: {auto_exposure: true, auto_white_balance: true, color_depth_synchronization: true,
+    color_mode: 5, color_time_offset: -0.033, data_skip: 0, depth_camera_info_url: '',
+    depth_frame_id: camera_depth_optical_frame, depth_ir_offset_x: 5.0, depth_ir_offset_y: 4.0,
+    depth_mode: 5, depth_registration: true, depth_time_offset: -0.033, device_id: '#1',
+    exposure: 0, id_manufacturer: 1d27, id_product: '0601', ir_mode: 5, ir_time_offset: -0.033,
+    rgb_camera_info_url: '', rgb_frame_id: camera_rgb_optical_frame, use_device_time: true,
+    z_offset_mm: 0, z_scaling: 1.0}
+  ir:
+    image:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+  rgb:
+    image_raw:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+    image_rect_color:
+      compressed: {format: jpeg, jpeg_quality: 80, png_level: 9}
+      compressedDepth: {depth_max: 10.0, depth_quantization: 100.0, png_level: 9}
+      theora: {keyframe_frequency: 64, optimize_for: 1, quality: 31, target_bitrate: 800000}
+  rgb_rectify_color: {interpolation: 1}
+detection:
+  CorrespondenceVoting:
+    correspondenceRatioThreshold: {max: 1.0, min: 0.0, type: double, value: 0.15}
+  ResultEvaluation:
+    sizeChecking: {type: bool, value: true}
+  control:
+    descriptorClass: {options: 'ShotCreator,CShotCreator,RSDCreator,FPFHCreator,ShapeContextCreator,UShapeContextCreator',
+      type: enum, value: CShotCreator}
+    evaluationClass: {options: 'CorrespondenceVoting,CorrespondenceVotingICP', type: enum,
+      value: CorrespondenceVoting}
+    keypointClass: {options: 'VoxelGridCreator,NDCreator,ISSCreator', type: enum,
+      value: VoxelGridCreator}
+    matchingClass: {options: 'ColorMatching,KColorMatching,KSColorMatching,SimpleMatching',
+      type: enum, value: KColorMatching}
+    poseEstimatorClass: {options: 'GCClustering,HoughClustering', type: enum, value: GCClustering}
+  debug:
+    descriptorDebugMessages: {type: bool, value: false}
+  descriptor:
+    3dsc:
+      minimalRadius: {max: 100.0, min: 0.0, type: double, value: 10.0}
+      pointDensityRadius: {max: 100.0, min: 0.0, type: double, value: 5.0}
+    radius: {max: 200.0, min: 0.0, type: double, value: 60}
+    rsd:
+      color: {type: bool, value: false}
+      planeRadius: {max: 100.0, min: 0.0, type: double, value: 20.0}
+    usc:
+      localRadius: {max: 200.0, min: 0.0, type: double, value: 75.0}
+      minimalRadius: {max: 100.0, min: 0.0, type: double, value: 10.0}
+      pointDensityRadius: {max: 100.0, min: 0.0, type: double, value: 5.0}
+  evaluation:
+    ICP:
+      maxIterations: {max: 1000.0, min: 0.0, type: int, value: 200}
+      resolution: {max: 50.0, min: 0.0, type: double, value: 5.0}
+      transformationEpsilon: {max: 0.001, min: 0.0, type: double, value: 1.0e-08}
+  guesser:
+    threshold: {max: 100.0, min: 0.0, type: double, value: 20.0}
+  keypoints:
+    iss:
+      minNeighbors: {max: 100.0, min: 0.0, type: int, value: 5}
+      nonMaxRadius: {max: 50.0, min: 0.0, type: double, value: 4.0}
+      salientRadius: {max: 50.0, min: 0.0, type: double, value: 6.0}
+      threshold21: {max: 50.0, min: 0.0, type: double, value: 0.975}
+      threshold32: {max: 50.0, min: 0.0, type: double, value: 0.975}
+    radius: {value: 15}
+  matching:
+    3dsc:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+    colorMatching:
+      angleThreshold: {max: 360.0, min: 0.0, type: double, value: 10}
+      blackThreshold: {max: 1.0, min: 0.0, type: double, value: 0.05}
+      grayThreshold: {max: 1.0, min: 0.0, type: double, value: 0.25}
+      valueThreshold: {max: 1.0, min: 0.0, type: double, value: 0.2}
+    cshot:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.5}
+    fpfh:
+      squareDistanceThreshold: {max: 10000.0, min: 0.0, type: float, value: 0.25}
+    kcolorMatching:
+      k: {max: 50.0, min: 0.0, type: int, value: 15}
+    rsd:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 2.0e-05}
+    shot:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+    usc:
+      squareDistanceThreshold: {max: 1.0, min: 0.0, type: float, value: 0.25}
+  normals:
+    radius: {max: 100.0, min: 1.0, type: int, value: 20}
+  poseEstimation:
+    gcClustering:
+      cgSize: {max: 200.0, min: 0.0, type: double, value: 100}
+      cgThreshold: {max: 100.0, min: 0.0, type: double, value: 5}
+    hough:
+      hgSize: {max: 200.0, min: 0.0, type: double, value: 45.0}
+      hgThreshold: {max: 100.0, min: 0.0, type: double, value: 20.0}
+  refFrame:
+    radius: {max: 100.0, min: 0.0, type: double, value: 25}
+  segmentation:
+    euclidean:
+      clusterTolerance: {max: 1.0, min: 0.0, type: double, value: 0.01}
+      maxClusterSize: {max: 100000.0, min: 0.0, type: int, value: 8000}
+      minClusterSize: {max: 10000.0, min: 0.0, type: int, value: 200}
+    kdradius: {max: 100.0, min: 1.0, type: int, value: 50}
+    sac:
+      cloudPointSize: {max: 1.0, min: 0.0, type: double, value: 0.3}
+      distanceThreshold: {max: 1.0, min: 0.0, type: double, value: 0.009}
+      maxIterations: {max: 100.0, min: 1.0, type: int, value: 100}
+    voxelLeafSize: {max: 1.0, min: 0.0, type: double, value: 0.01}
+  visualization:
+    denseSize: {max: 20.0, min: 0.0, type: double, value: 1.0}
+    estimationSize: {max: 20.0, min: 0.0, type: double, value: 4.0}
+    keypointSize: {max: 20.0, min: 0.0, type: double, value: 8.0}
+    showAllCorrespondences: {type: bool, value: false}
+    showCorrespondences: {type: bool, value: true}
+    showDense: {type: bool, value: true}
+    showEstimatedObjects: {type: bool, value: true}
+    showKeypoints: {type: bool, value: true}
+    showMatchingColor: {type: bool, value: true}
+    showNormals: {type: bool, value: false}
+    showOnlyWinner: {type: bool, value: true}
+    showReferenceFrames: {type: bool, value: false}
+    showVoting: {type: bool, value: false}
+    useModelOffset: {type: bool, value: true}
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_getpc9__44531: 'http://getpc9:44531/'}
+rosversion: '1.12.14
+
+  '
+run_id: b28a3dfa-5c75-11e9-890a-0026b9789286

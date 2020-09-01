@@ -1,0 +1,14 @@
+<launch>
+	<node name="main" pkg="database" type="main" output="screen" args=""/>
+
+	<node pkg="operator_interface" name="operator_interface" type="operator_interface" output="screen" required="true">
+		<param name="image_transport" value="theora" />
+	</node>
+
+	<group ns="GETjag1">
+	<param name="robot_type" value="GETjag" />
+
+	<param name="test/gui/Dexterity" value="DetectionWidget" />
+	</group>
+
+</launch>

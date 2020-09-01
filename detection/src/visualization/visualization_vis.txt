@@ -1,0 +1,307 @@
+/*
+ * visualization.cpp
+ *
+ *  Created on: Dec 3, 2018
+ *      Author: philipf
+ */
+#include "../../include/visualization/visualization.h"
+#include <pcl/common/transforms.h>
+#include <string>
+
+Visualization::Visualization()
+{
+	showKeypoints = RosParameterManager::createParam<bool> (true,ParamType::BOOL,"/visualization/showKeypoints");
+	showNormals = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showNormals");
+	showDense = RosParameterManager::createParam<bool> (true,ParamType::BOOL,"/visualization/showDense");
+	showCorrespondences = RosParameterManager::createParam<bool> (true,ParamType::BOOL,"/visualization/showCorrespondences");
+	showEstimatedObjects = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showEstimatedObjects");
+	showReferenceFrames = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showReferenceFrames");
+	showAllCorrespondences = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showAllCorrespondences");
+	showMatchingColor = RosParameterManager::createParam<bool> (true,ParamType::BOOL,"/visualization/showMatchingColor");
+	showOnlyWinner = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showOnlyWinner");
+	showVoting = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/showVoting");
+	useModelOffset = RosParameterManager::createParam<bool> (false,ParamType::BOOL,"/visualization/useModelOffset");
+	denseSize = RosParameterManager::createParam<double> (1.0,ParamType::DOUBLE,0.0,20.0,"/visualization/denseSize");
+	keypointSize = RosParameterManager::createParam<double> (8.0,ParamType::DOUBLE,0.0,20.0,"/visualization/keypointSize");
+	estimationSize = RosParameterManager::createParam<double> (4.0,ParamType::DOUBLE,0.0,20.0,"/visualization/estimationSize");
+	colorCounter = 0;
+	r = 0;
+	g = 0;
+	b = 0;
+}
+Visualization::~Visualization()
+{
+}
+void Visualization::init (std::shared_ptr<Blackboard> gBoard)
+{
+	if(!gBoard)
+	{
+		std::cout << "[Visualization]: gBoard not valid!" << std::endl;
+	}
+	board = gBoard;
+	viewer.setBackgroundColor (0.1, 0.1, 0.1, 0);
+	viewer.setWindowName ("Viewer");
+	viewer.initCameraParameters ();
+}
+void Visualization::spinOnce ()
+{
+	if(!board) return;
+	viewer.spinOnce();
+	if(counter == board->counter) return;
+	removeAllSegments();
+	for(size_t segId = 0; segId < board->segments.size(); segId++)
+	{
+		std::cout << "[Visualization]: Drawing segments!\n";
+		Segment *seg = &board->segments.at(segId);
+		drawCloud(&seg->data,false,segId);
+		if (showCorrespondences->var)
+		{
+			if (showAllCorrespondences->var)
+			{
+				drawAllCorrespondences (seg,std::to_string(segId));
+			}
+			else if(showOnlyWinner->var)
+			{
+				drawCorrespondences (seg,&seg->bestGuess,&board->models.at(seg->bestGuess.modelId),"s" + std::to_string(segId));
+			}else{
+				for(size_t modelId = 0; modelId < seg->results.size(); modelId++)
+				{
+					for(size_t modelInstance = 0; modelInstance < seg->results.at(modelId).size(); modelInstance++)
+					{
+						drawCorrespondences (seg,&seg->results.at(modelId).at(modelInstance),&board->models.at(modelId),"s" + std::to_string(segId) + "m" + std::to_string(modelId) + "i" + std::to_string(modelInstance));
+					}
+				}
+			}
+		}
+	}
+	counter = board->counter;
+	viewer.spinOnce();
+}
+void Visualization::drawModels()
+{
+	if(!board)
+	{
+		std::cout << "[Visualization::drawModels]: ERROR blackboard not valid!\n";
+		return;
+	}
+	if(false)
+	{
+		std::cout << "[Visualization]: Visualization disabled by user.\n";
+		return;
+	}
+	viewer.removeAllPointClouds(0);
+	viewer.removeAllCoordinateSystems(0);
+	viewer.removeAllShapes(0);
+	std::cout << "[Visualization]: Total number of models: " << board->models.size() << std::endl;
+	for(Model mod : board->models)
+	{
+		std::cout << "[Visualization]: Drawing model named: " << mod.name << std::endl;
+		drawCloud(&mod.data,true,mod.id,mod.positionOffset);
+	}
+}
+
+void Visualization::removeAllSegments()
+{
+	for(std::string name : lines){
+		viewer.removeShape(name,0);
+	}
+	for(std::string name : detectedClouds){
+		viewer.removePointCloud(name,0);
+	}
+	for(std::string name : arrows){
+		viewer.removeShape(name,0);
+	}
+	for(std::string name : spheres){
+		viewer.removeShape(name,0);
+	}
+	for(std::string name : rfs){
+		viewer.removeShape(name,0);
+	}
+	for(std::string name : cloudSegments){
+		viewer.removePointCloud(name,0);
+		viewer.removePointCloud(name + "_normals",0);
+		viewer.removePointCloud(name + "_keypoints",0);
+	}
+}
+void Visualization::drawCloud(ProcessedCloud *data, bool isModel, unsigned int id, tf::Vector3 modelOffset)
+{
+	if(data->cloud->size() == 0) return;
+	std::stringstream cloudName;
+	cloudName << "cloud_" << counter << "_M" << isModel << "id" << id;
+	if(!isModel) cloudSegments.push_back(cloudName.str());
+	if(showDense->var)
+	{
+		viewer.addPointCloud(data->cloud, cloudName.str());
+		viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, denseSize->var, cloudName.str());
+	}
+	if(showNormals->var)
+	{
+		viewer.addPointCloudNormals<PointType, NormalType>(data->cloud, data->normals, 10, 0.007, cloudName.str() + "_normals");
+	}
+	if(showKeypoints->var)
+	{
+		pcl::visualization::PointCloudColorHandlerRGBField<PointType> rgb (data->keypoints);
+		viewer.addPointCloud(data->keypoints, rgb, cloudName.str() + "_keypoints");
+		viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, keypointSize->var, cloudName.str() + "_keypoints");
+	}
+	if(showReferenceFrames->var)
+	{
+		Eigen::Affine3f t;
+		std::stringstream ss_line;
+		for (size_t i = 0; i < data->rfs->size (); i++)
+		{
+			ss_line.clear();
+			ss_line << "ref_frame_" << counter << "i" << id << "_" << i;
+			Eigen::Map<Eigen::Matrix3f> map = data->rfs->at (i).getMatrix3fMap ();
+
+			t.matrix ().block<3, 3> (0, 0) = map.block<3, 3> (0, 0);
+			t.matrix ().block<3, 1> (0, 3) << data->keypoints->at (i).x, data->keypoints->at (i).y, data->keypoints->at (i).z;
+			t.matrix ().block<1, 4> (3, 0) << 0, 0, 0, 1;
+			viewer.addCoordinateSystem (0.005, t, ss_line.str (), 0);
+			rfs.push_back(ss_line.str());
+		}
+		if(isModel)
+		{
+			t.matrix ().block<3, 3> (0, 0) << 1, 0, 0, 0, 1, 0, 0, 0, 1;
+			if(useModelOffset->var) t.matrix ().block<3, 1> (0, 3) << modelOffset.x (), modelOffset.y (), modelOffset.z ();
+			else t.matrix ().block<3, 1> (0, 3) << 0, 0, 0;
+			ss_line << "ref_frame_" << counter << "_origin";
+			viewer.addCoordinateSystem (0.05, t, ss_line.str (), 0);
+			rfs.push_back (ss_line.str ());
+		}
+	}
+	if(showVoting->var)
+	{
+		ROS_ERROR("[Visualization]: ShowVoting has not been implemented.");
+	}
+}
+void Visualization::drawAllCorrespondences(Segment *seg, std::string id)
+{
+	if(!seg->data.keypoints){
+		std::cout << "[Visualization]: seg->data.keypoints not valid." << std::endl;
+		return;
+	}
+
+	for(size_t i = 0; i < seg->model_scene_corrs_vec.size(); i++) //For all models
+	{
+		for (size_t j = 0; j < seg->model_scene_corrs_vec.at(i)->size(); ++j) //For all correspondences with that model
+		{
+			std::stringstream ss_line;
+			ss_line << "s_" << counter << "i" << id << "_m_" << i << "_i_" << j;
+			PointType& model_point = board->models.at(i).data.keypoints->at (seg->model_scene_corrs_vec.at(i)->at(j).index_query);
+			PointType& scene_point = seg->data.keypoints->at (seg->model_scene_corrs_vec.at(i)->at(j).index_match); // index_query
+			//  We are drawing a line for each pair of clustered correspondences found between the model and the scene
+			if (showMatchingColor->var)
+			{
+				viewer.addLine<PointType, PointType> (model_point, scene_point, (double)model_point.r / 255.0, (double)model_point.g / 255.0, (double)model_point.b / 255.0, ss_line.str ());
+			}
+			else
+			{
+				viewer.addLine<PointType, PointType> (model_point, scene_point, 0.0, 1.0, 0.0, ss_line.str ());
+			}
+			lines.push_back (ss_line.str ());
+		}
+	}
+}
+void Visualization::drawCorrespondences(Segment *seg, Result *result, Model *model, std::string id)
+{
+	if(result->name == "UNKNOWN")
+	{
+		//std::cout << "[Visualization]: Result is UNKNOWN!" << std::endl;
+		return;
+	}
+
+	r = colorCounter % 3;
+	g = (colorCounter/2) % 3;
+	b = (colorCounter/4) % 3;
+	if(colorCounter == 0) b = 1;
+	colorCounter++;
+	if(showEstimatedObjects->var)
+	{
+		pcl::PointCloud<PointType>::Ptr rotated_model = boost::make_shared<pcl::PointCloud<PointType>>();
+		/*
+		std::cout << "key size: " << model->data.keypoints->size() << std::endl;
+		std::cout << "Other size: " << rotated_model->size() << std::endl;
+		std::cout << "ModelRotTo size: " << result->rototranslations.size() << std::endl;
+		std::cout << result->rototranslations.at(0) << std::endl;*/
+		std::cout << "If segmentation fault occours right after this, Visualization::drawCorrespondences caused your problem...\n";
+		pcl::transformPointCloud(*model->data.keypoints, *rotated_model, result->rototranslations.at(0));
+		std::cout << "but this time, it did not. ;-)\n";
+		std::stringstream ss_cloud;
+		ss_cloud << "obj_" << counter << "i" << id;
+		bool isBestCloud = false;
+		if(false)
+		{
+			isBestCloud = true;
+		}
+		int rs, gs, bs;
+		if(isBestCloud)
+		{
+			rs = 255;
+			gs = 255;
+			bs = 255;
+		}
+		else
+		{
+			rs = 255;
+			gs = 0;
+			bs = 0;
+		}
+		if(!showMatchingColor->var)
+		{
+			rs = r * 255;
+			gs = g * 255;
+			bs = b * 255;
+		}
+		pcl::visualization::PointCloudColorHandlerCustom<PointType> rotated_model_color_handler(rotated_model, rs, gs, bs);
+
+		viewer.addPointCloud(rotated_model, rotated_model_color_handler, ss_cloud.str());
+		detectedClouds.push_back(ss_cloud.str());
+
+		if(isBestCloud)
+		{
+			viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, estimationSize->var, ss_cloud.str());
+		}
+		else
+		{
+			viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, estimationSize->var, ss_cloud.str());
+		}
+	}
+	if(showCorrespondences->var)//TODO
+	{
+		pcl::Correspondences *clustered_corrs= &result->model_scene_corrs;
+		pcl::PointCloud<PointType>::Ptr model_points;
+		pcl::PointCloud<PointType>::Ptr szene_points;
+		model_points = model->data.keypoints;
+		szene_points = seg->data.keypoints;
+
+		for(size_t j = 0; j < clustered_corrs->size(); ++j)
+		{
+			std::stringstream ss_line;
+			ss_line << "correspondence_" << counter << "i" << id << "_" << j;
+			PointType& model_point = model_points->at(clustered_corrs->at(j).index_query);
+			PointType& scene_point = szene_points->at(clustered_corrs->at(j).index_match);
+
+			//  We are drawing a line for each pair of clustered correspondences found between the model and the scene
+			if(showMatchingColor->var)
+			{
+				viewer.addLine<PointType, PointType>(model_point, scene_point, (double)model_point.r / 255.0, (double)model_point.g / 255.0,
+						(double)model_point.b / 255.0, ss_line.str());
+			}
+			else
+			{
+				viewer.addLine<PointType, PointType>(model_point, scene_point, r, g, b, ss_line.str());
+			}
+			lines.push_back(ss_line.str());
+		}
+	}
+}
+
+tf::Vector3 Visualization::getModelOffset()
+{
+	if(useModelOffset->var) return modelOffset;
+	else return modelOffset * 0.0;
+	return modelOffset;
+}
+
+
