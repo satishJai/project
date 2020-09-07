@@ -2,7 +2,7 @@
  * Guesser.cpp
  *
  *  Created on: Nov 27, 2018
- *      Author: philipf
+ *      Author: satishj
  */
 
 #include "../../include/evaluation/Guesser.h"
