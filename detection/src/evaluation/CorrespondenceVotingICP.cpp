@@ -2,7 +2,7 @@
  * CorrespondenceVoting.cpp
  *
  *  Created on: Nov 27, 2018
- *      Author: philipf
+ *      Author: satishj
  */
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/registration/icp.h>
