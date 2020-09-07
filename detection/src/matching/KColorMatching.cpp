@@ -2,7 +2,7 @@
  * KColorMatching.cpp
  *
  *  Created on: 28 March, 2019
- *      Author: philipf
+ *      Author: satishj
  */
 #include "../../include/matching/KColorMatching.h"
 #include <pcl/kdtree/kdtree_flann.h>
