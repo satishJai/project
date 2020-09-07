@@ -2,7 +2,7 @@
  * Blackboard.cpp
  *
  *  Created on: Nov 26, 2018
- *      Author: philipf
+ *      Author: satishj
  */
 #include "../include/Blackboard.h"
 #include "../include/keypoint/VoxelGridCreator.h"
