@@ -2,7 +2,7 @@
  * ColorMatching.cpp
  *
  *  Created on: Nov 16, 2018
- *      Author: philipf
+ *      Author: satishj
  */
 #include "../../include/matching/ColorMatching.h"
 #include <pcl/correspondence.h>
